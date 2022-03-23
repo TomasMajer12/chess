@@ -5,49 +5,27 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
-public class StartMenu extends Application{
-    public void start(final Stage primaryStage) {
+public class StartMenu extends Application {
 
-        Button button = new Button();
-        button.setText("Open a New Window");
-
-        button.setOnAction(new EventHandler<ActionEvent>() {
-
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World!");
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
-                Label secondLabel = new Label("I'm a Label on new Window");
-
-                StackPane secondaryLayout = new StackPane();
-                secondaryLayout.getChildren().add(secondLabel);
-
-                Scene secondScene = new Scene(secondaryLayout, 230, 100);
-
-                // New window (Stage)
-                Stage newWindow = new Stage();
-                newWindow.setTitle("Second Stage");
-                newWindow.setScene(secondScene);
-
-                // Set position of second window, related to primary window.
-                newWindow.setX(primaryStage.getX() + 200);
-                newWindow.setY(primaryStage.getY() + 100);
-
-                newWindow.show();
+                System.out.println("Hello World!");
             }
         });
 
         StackPane root = new StackPane();
-        root.getChildren().add(button);
-
-        Scene scene = new Scene(root, 450, 250);
-
-        primaryStage.setTitle("JavaFX Open a new Window (o7planning.org)");
-        primaryStage.setScene(scene);
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();
     }
 }

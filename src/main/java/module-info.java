@@ -1,4 +1,4 @@
-module com.example.chess {
+module cz.cvut.fel.pjv{
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -9,6 +9,6 @@ module com.example.chess {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.example.chess to javafx.fxml;
-    exports com.example.chess;
+    opens cz.cvut.fel.pjv to javafx.fxml;
+    exports cz.cvut.fel.pjv.gui;
 }
