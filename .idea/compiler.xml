@@ -13,4 +13,9 @@
       <module name="chess" target="17" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="chess" options="--add-exports java.xml/jdk.xml.internal=cz.cvut.fel.pjv" />
+    </option>
+  </component>
 </project>
