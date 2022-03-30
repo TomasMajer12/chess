@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv;
+package cz.cvut.fel.pjv.gui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
