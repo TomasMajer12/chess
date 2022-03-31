@@ -20,9 +20,9 @@ public class StartMenu extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui_style.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/gui_style.fxml"));
         primaryStage.setTitle("Chess");
-        primaryStage.getIcons().add(new Image(StartMenu.class.getResourceAsStream("/images/img.png")));
+        primaryStage.getIcons().add(new Image(StartMenu.class.getResourceAsStream("/images/icon.png")));
 
         new_game = new Button();
         settings = new Button();
@@ -38,6 +38,7 @@ public class StartMenu extends Application {
         BorderPane border = new BorderPane();
         border.setCenter(box);
         Scene my_scene = new Scene(root,640,480);
+        my_scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         primaryStage.setScene(my_scene);
         primaryStage.show();
     }
