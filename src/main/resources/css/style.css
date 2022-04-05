@@ -1,4 +1,10 @@
 .root {
-    -fx-background-color: #fc0000;
+    -fx-background-color: rgba(17, 1, 1, 0.62);
+}
+
+.button {
+    -fx-background-color: #fa0101;
+    -fx-end-margin: 20;
+    -fx-start-margin: 20;
 }
 

@@ -23,20 +23,6 @@ public class StartMenu extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/gui_style.fxml"));
         primaryStage.setTitle("Chess");
         primaryStage.getIcons().add(new Image(StartMenu.class.getResourceAsStream("/images/icon.png")));
-
-        new_game = new Button();
-        settings = new Button();
-        exit = new Button();
-
-        new_game.setText("NEW GAME");
-        settings.setText("SETTINGS");
-        exit.setText("EXIT");
-
-        VBox box = new VBox(new_game,settings,exit);
-        box.setAlignment(Pos.CENTER);
-
-        BorderPane border = new BorderPane();
-        border.setCenter(box);
         Scene my_scene = new Scene(root,640,480);
         my_scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         primaryStage.setScene(my_scene);

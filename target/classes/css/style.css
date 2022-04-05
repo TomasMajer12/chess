@@ -1,0 +1,13 @@
+.root {
+    -fx-background-color: rgba(17, 1, 1, 0.33);
+}
+
+.button {
+    -fx-background-color: #fa0101;
+    -fx-end-margin: 20;
+    -fx-start-margin: 20;
+    -fx-spacing: 20;
+    -fx-border-width: 0;
+    -fx-padding: 10 20 10 20;
+}
+
