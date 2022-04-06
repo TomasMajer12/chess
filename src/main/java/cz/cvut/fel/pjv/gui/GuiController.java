@@ -20,7 +20,7 @@ public class GuiController {
     @FXML
     private void change_to_new_game(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) new_game.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/chess_board_style.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/new_game_style.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         stage.setScene(scene);
@@ -30,7 +30,7 @@ public class GuiController {
     @FXML
     private void change_to_settings(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) settings.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/chess_board_style.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/settings_style.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         stage.setScene(scene);
@@ -44,6 +44,9 @@ public class GuiController {
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
+    }
+    @FXML
+    private void change_to_load_game(ActionEvent actionEvent) {
     }
 
     @FXML
