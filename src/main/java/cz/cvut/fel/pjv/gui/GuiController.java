@@ -36,8 +36,8 @@ public class GuiController {
         stage.setScene(scene);
         stage.show();
     }
-
-    public void change_to_main_menu(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void change_to_main_menu(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) back.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu_style.fxml"));
         Scene scene = new Scene(root);
