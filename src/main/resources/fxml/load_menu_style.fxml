@@ -24,15 +24,10 @@
     <center>
         <VBox alignment="CENTER"  BorderPane.alignment="CENTER" styleClass="buttonPanel" stylesheets="@../css/style.css">
             <children>
-                <Button mnemonicParsing="false"  text="PLAYER VS PLAYER" BorderPane.alignment="CENTER"/>
-                <Label text="PLAYER VS AI">
-                    <font>
-                        <Font size="45.0" />
-                    </font>
-                </Label>
-                <Button mnemonicParsing="false"  text="EASY" BorderPane.alignment="CENTER"/>
-                <Button mnemonicParsing="false"  text="HARD" BorderPane.alignment="CENTER"/>
-                <Button  fx:id="back" mnemonicParsing="false" onAction="#change_to_main_menu" text="BACK" BorderPane.alignment="CENTER"/>
+                <Button  mnemonicParsing="false" text="SAVE 1" BorderPane.alignment="CENTER"/>
+                <Button  mnemonicParsing="false" text="SAVE 2" BorderPane.alignment="CENTER"/>
+                <Button  mnemonicParsing="false" text="SAVE 3" BorderPane.alignment="CENTER"/>
+                <Button fx:id="back" mnemonicParsing="false" onAction="#change_to_main_menu" text="BACK" BorderPane.alignment="CENTER"/>
             </children>
         </VBox>
     </center>

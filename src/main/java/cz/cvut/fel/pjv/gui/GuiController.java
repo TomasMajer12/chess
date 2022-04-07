@@ -15,7 +15,7 @@ import java.io.IOException;
 public class GuiController {
 
     @FXML
-    private Button new_game,settings,back;
+    private Button new_game,settings,back,load_game;
 
     @FXML
     private void change_to_new_game(ActionEvent actionEvent) throws IOException {
@@ -46,7 +46,13 @@ public class GuiController {
         stage.show();
     }
     @FXML
-    private void change_to_load_game(ActionEvent actionEvent) {
+    private void change_to_load_game(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) load_game.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/load_menu_style.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
