@@ -3,7 +3,9 @@ package cz.cvut.fel.pjv.figures;
 import cz.cvut.fel.pjv.game.ChessField;
 import javafx.scene.paint.Color;
 
-public class Figure {
+import java.util.List;
+
+public abstract class Figure {
 
     int x, y;
     Color color;
@@ -16,4 +18,13 @@ public class Figure {
         this.name = name;
         this.field = field;
     }
+
+    public List<ChessField> getAccessibleFields(){
+        List<ChessField> fields= AccessibleFields();
+        return fields;
+    }
+
+    //
+    public abstract List<ChessField> AccessibleFields();
+
 }
