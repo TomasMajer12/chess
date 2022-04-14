@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="650" minWidth="700"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cz.cvut.fel.pjv.gui.GuiController">
+    <top>
+        <StackPane  BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="namedLabel" text="Chess">
+                    <font>
+                        <Font size="150.0" />
+                    </font></Label>
+            </children>
+        </StackPane>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER"  BorderPane.alignment="CENTER" styleClass="buttonPanel" stylesheets="@../css/style.css">
+            <children>
+                <Button  mnemonicParsing="false" text="SAVE 1" BorderPane.alignment="CENTER"/>
+                <Button  mnemonicParsing="false" text="SAVE 2" BorderPane.alignment="CENTER"/>
+                <Button  mnemonicParsing="false" text="SAVE 3" BorderPane.alignment="CENTER"/>
+                <Button fx:id="back" mnemonicParsing="false" onAction="#change_to_main_menu" text="BACK" BorderPane.alignment="CENTER"/>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
+
+

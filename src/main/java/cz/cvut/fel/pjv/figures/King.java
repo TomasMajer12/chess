@@ -1,4 +1,17 @@
 package cz.cvut.fel.pjv.figures;
 
-public class King {
+import cz.cvut.fel.pjv.game.ChessField;
+import javafx.scene.paint.Color;
+
+import java.util.List;
+
+public class King extends Figure{
+    public King(Color color, String name, ChessField field) {
+        super(color, name, field);
+    }
+
+    @Override
+    public List<ChessField> AccessibleFields() {
+        return null;
+    }
 }
