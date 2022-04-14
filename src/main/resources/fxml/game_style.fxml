@@ -12,7 +12,7 @@
             fx:controller="cz.cvut.fel.pjv.gui.GuiController">
 
     <center>
-        <GridPane fx:id="table">
+        <GridPane id="table" fx:id="table">
 
         </GridPane>
     </center>

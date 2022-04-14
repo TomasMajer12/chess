@@ -19,12 +19,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class GuiController extends Application {
+
+public class GuiController extends Application{
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu_style.fxml"));
         primaryStage.setTitle("Chess");
-        primaryStage.getIcons().add(new Image(GuiController.class.getResourceAsStream("/images/icon.png")));
+        primaryStage.getIcons().add(Utils.loadImage("/images/icon.png",25,25));
         primaryStage.setMinHeight(650);
         primaryStage.setMinWidth(700);
         Scene main_menu = new Scene(root);
@@ -37,43 +39,28 @@ public class GuiController extends Application {
     private Button new_game,settings,back,load_game,game;
 
     @FXML
+    private GridPane table;
+
+    private Utils utils = new Utils();
+
+    @FXML
     private void change_to_new_game(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) new_game.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/new_game_style.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+        utils.change_scene(new_game,"/fxml/new_game_style.fxml");
     }
 
     @FXML
     private void change_to_settings(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) settings.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/settings_style.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+        utils.change_scene(settings,"/fxml/settings_style.fxml");
     }
 
     @FXML
     private void change_to_main_menu(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) back.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu_style.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+        utils.change_scene(back,"/fxml/menu_style.fxml");
     }
 
     @FXML
-    private void change_to_load_game(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) load_game.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/load_menu_style.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+    private void change_to_load_game(ActionEvent actionEvent) throws IOException{
+        utils.change_scene(load_game,"/fxml/load_menu_style.fxml");
     }
 
     @FXML
@@ -86,7 +73,7 @@ public class GuiController extends Application {
         Stage stage = (Stage) game.getScene().getWindow();
         BorderPane pane = new BorderPane();
         //chess board with column and row markings
-        GridPane table = new GridPane();
+        table = new GridPane();
         for (int i = 0; i < 8; i++) {
             table.add(newRowLabel(i), 0, i + 1, 1, 1);
             table.add(newRowLabel(i), 9, i + 1, 1, 1);
@@ -97,6 +84,7 @@ public class GuiController extends Application {
         table.setAlignment(Pos.CENTER);
         pane.setCenter(table);
         Scene scene = new Scene(pane);
+        //scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -114,6 +102,4 @@ public class GuiController extends Application {
         l.setAlignment(Pos.CENTER);
         return l;
     }
-
-
 }
