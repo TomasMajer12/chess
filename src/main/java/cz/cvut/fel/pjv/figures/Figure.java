@@ -19,12 +19,13 @@ public abstract class Figure {
         this.field = field;
     }
 
+
     public List<ChessField> getAccessibleFields(){
         List<ChessField> fields= AccessibleFields();
         return fields;
     }
 
-    //
+
     public abstract List<ChessField> AccessibleFields();
 
 }

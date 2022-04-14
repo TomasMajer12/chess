@@ -1,6 +1,8 @@
 package cz.cvut.fel.pjv.game;
 
-public class ChessField {
+import javafx.scene.control.Label;
+
+public class ChessField extends Label{
     private int x,y;
     private ChessBoard board;
 

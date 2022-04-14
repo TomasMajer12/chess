@@ -11,11 +11,11 @@
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="cz.cvut.fel.pjv.gui.GuiController">
     <top>
-        <StackPane rotate="-10" BorderPane.alignment="CENTER">
+        <StackPane  BorderPane.alignment="CENTER">
             <children>
-                <Label  text="Chess">
+                <Label fx:id="namedLabel" text="Chess">
                     <font>
-                        <Font size="100.0" />
+                        <Font size="150.0" />
                     </font></Label>
             </children>
         </StackPane>
@@ -24,7 +24,7 @@
     <center>
         <VBox alignment="CENTER"  BorderPane.alignment="CENTER" styleClass="buttonPanel" stylesheets="@../css/style.css">
             <children>
-                <Button mnemonicParsing="false"  text="PLAYER VS PLAYER" BorderPane.alignment="CENTER"/>
+                <Button mnemonicParsing="false" fx:id="game" text="PLAYER VS PLAYER" onAction="#game_start" BorderPane.alignment="CENTER"/>
                 <Label text="PLAYER VS AI">
                     <font>
                         <Font size="45.0" />
