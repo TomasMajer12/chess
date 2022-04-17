@@ -38,7 +38,6 @@ public class GuiController extends Application{
     @FXML
     private Button new_game,settings,back,load_game,game;
 
-    @FXML
     private GridPane table;
 
     private Utils utils = new Utils();
@@ -71,35 +70,30 @@ public class GuiController extends Application{
     @FXML
     private void game_start(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) game.getScene().getWindow();
+        stage.setMinWidth(700);
+        stage.setMinHeight(650);
         BorderPane pane = new BorderPane();
+        pane.setMinSize(700,650);
         //chess board with column and row markings
         table = new GridPane();
+
         for (int i = 0; i < 8; i++) {
-            table.add(newRowLabel(i), 0, i + 1, 1, 1);
-            table.add(newRowLabel(i), 9, i + 1, 1, 1);
-            table.add(newColLabel(i), i + 1, 0, 1, 1);
-            table.add(newColLabel(i), i + 1, 9, 1, 1);
+            table.add(Utils.newRowLabel(i), 0, i + 1, 1, 1);
+            table.add(Utils.newRowLabel(i), 9, i + 1, 1, 1);
+            table.add(Utils.newColLabel(i), i + 1, 0, 1, 1);
+            table.add(Utils.newColLabel(i), i + 1, 9, 1, 1);
         }
+        table.add(Utils.setCorners(),0,0,1,1);
+        table.add(Utils.setCorners(),0,9,1,1);
+        table.add(Utils.setCorners(),9,9,1,1);
+        table.add(Utils.setCorners(),9,0,1,1);
         table.add(new ChessBoard(), 1, 1, 8, 8);
         table.setAlignment(Pos.CENTER);
         pane.setCenter(table);
         Scene scene = new Scene(pane);
-        //scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
-    private Label newRowLabel(int i) {
-        Label l = new Label(8 - i + "");
-        l.setMinSize(20, 50);
-        l.setAlignment(Pos.CENTER);
-        return l;
-    }
-
-    private Label newColLabel(int i) {
-        Label l = new Label((char) (i + 65) + "");
-        l.setMinSize(50, 20);
-        l.setAlignment(Pos.CENTER);
-        return l;
-    }
 }
