@@ -11,7 +11,6 @@ import java.util.Set;
 public class ChessBoard extends GridPane {
 
     private ChessField[] fields = new ChessField[64];
-    private GridPane table;
 
     public ChessBoard() {
         for (int i = 0; i < 64; i++) {

@@ -27,26 +27,4 @@ public class Utils {
         stage.show();
     }
 
-    public static Label newRowLabel(int i) {
-        Label l = new Label(8 - i + "");
-        l.setStyle("-fx-background-color: #808080;-fx-border-style: solid");
-        l.setMinSize(20, 50);
-        l.setAlignment(Pos.CENTER);
-        return l;
-    }
-
-    public static Label newColLabel(int i) {
-        Label l = new Label((char) (i + 65) + "");
-        l.setStyle("-fx-background-color: #808080;-fx-border-style: solid");
-        l.setMinSize(50, 20);
-        l.setAlignment(Pos.CENTER);
-        return l;
-    }
-
-    public static Label setCorners(){
-        Label l = new Label();
-        l.setStyle("-fx-background-color: #808080;-fx-border-style: solid");
-        l.setMinSize(20, 20);
-        return l;
-    }
 }

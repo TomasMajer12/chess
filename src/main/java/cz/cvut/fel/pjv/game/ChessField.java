@@ -10,7 +10,7 @@ public class ChessField extends Label{
         this.board = board;
         this.x = x;
         this.y = y;
-        if(getColor(x,y)){
+        if(getColor()){
             setStyle("-fx-background-color: white;-fx-border-style: solid");
         }else{
             setStyle("-fx-background-color: #595959;-fx-border-style: solid");
@@ -18,7 +18,7 @@ public class ChessField extends Label{
         setMinSize(50, 50);
     }
 
-    private boolean getColor(int x,int y){
+    private boolean getColor(){
         return (x % 2 == 1 && y % 2 == 1) || x % 2 == 0 && y % 2 == 0 ? true : false;
     }
 }
