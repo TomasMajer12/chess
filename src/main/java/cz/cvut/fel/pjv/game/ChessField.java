@@ -5,19 +5,23 @@ import cz.cvut.fel.pjv.gui.Utils;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 
 import java.util.List;
 
 public class ChessField extends Label{
-    private int x,y;
+    private final int x,y;
     private ChessBoard board;
     Figure figure = null;
-    private String whiteDefault = "-fx-background-color: white;-fx-border-style: solid";
-    private String blackDefault = "-fx-background-color: #4d4d4d;-fx-border-style: solid";
-    private String whiteEmptySpace = "-fx-background-color: white;-fx-border-style: solid;-fx-border-color: #ec6060;-fx-border-width: 2";
-    private String blackEmptySpace = "-fx-background-color: #4d4d4d;-fx-border-style: solid;-fx-border-color:  #ec6060;-fx-border-width: 2";
-    private String whiteKillSpace = "-fx-background-color: #c05555;-fx-border-style: solid;-fx-border-color:  #ec6060;-fx-border-width: 2";
-    private String blackKillSpace = "-fx-background-color: #6b2a2a;-fx-border-style: solid;-fx-border-color:  #ec6060;-fx-border-width: 2";
+    private final String whiteDefault = "-fx-background-color: white;-fx-border-style: solid";
+    private final String blackDefault = "-fx-background-color: #4d4d4d;-fx-border-style: solid";
+    private final String whiteEmptySpace = "-fx-background-color: #c05555;-fx-border-style: solid";
+    private final String blackEmptySpace = "-fx-background-color: #6b2a2a;-fx-border-style: solid";
+    private final String whiteKillSpace = "-fx-background-color: #c05555;-fx-border-style: solid;-fx-border-color:  #ff1b1b;-fx-border-width: 2";
+    private final String blackKillSpace = "-fx-background-color: #6b2a2a;-fx-border-style: solid;-fx-border-color:  #ff1b1b;-fx-border-width: 2";
 
     public ChessField(ChessBoard board,int x, int y) {
         this.board = board;
@@ -98,4 +102,5 @@ public class ChessField extends Label{
             }
         }
     }
+
 }

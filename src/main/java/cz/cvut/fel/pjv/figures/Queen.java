@@ -11,36 +11,36 @@ public class Queen extends Figure{
         super(color, name, field);
     }
 
-    @SuppressWarnings("DuplicatedCode")
+
     @Override
     public List<ChessField> AccessibleFields() {
         List<ChessField> fields = new ArrayList<>();
         //diagonals
         for (int i = 1; x + i < 8 && y + i < 8; i++){
-            if (addField(x + i, y + i, fields) == false)break;
+            if (addField(x + i, y + i, fields))break;
         }
         for (int i = 1; x + i < 8 && y - i >= 0; i++) {
-            if (addField(x + i, y - i, fields) == false)break;
+            if (addField(x + i, y - i, fields))break;
         }
         for (int i = 1; x - i >= 0 && y + i < 8; i++){
-            if (addField(x - i, y + i, fields) == false)break;
+            if (addField(x - i, y + i, fields))break;
         }
         for (int i = 1; x - i >= 0 && y - i >= 0; i++){
-            if (addField(x - i, y - i, fields) == false)break;
+            if (addField(x - i, y - i, fields))break;
         }
 
         //other directions
         for (int i = 1; y+i < 8; i++){
-            if(addField(x,y+i,fields) == false)break;
+            if(addField(x, y + i, fields))break;
         }
         for (int i = 1; y-i >=0; i++){
-            if(addField(x,y-i,fields) == false)break;
+            if(addField(x, y - i, fields))break;
         }
         for (int i = 1; x+i < 8; i++){
-            if(addField(x+i,y,fields) == false)break;
+            if(addField(x + i, y, fields))break;
         }
         for (int i = 1; x-i >=0; i++){
-            if(addField(x-i,y,fields) == false)break;
+            if(addField(x - i, y, fields))break;
         }
         return fields;
     }

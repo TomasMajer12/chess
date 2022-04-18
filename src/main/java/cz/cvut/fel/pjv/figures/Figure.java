@@ -4,14 +4,15 @@ import cz.cvut.fel.pjv.game.ChessField;
 import javafx.scene.input.DataFormat;
 import javafx.scene.paint.Color;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Figure {
+public abstract class Figure implements Serializable {
     public transient static final DataFormat CHESS_FIGURE = new DataFormat("chess.figure");
     int x, y;
     Color color;
-    private String name;
-    private String imageStream;
+    private final String name;
+    private final String imageStream;
     public ChessField field;
 
     public Figure(Color color, String name, ChessField field) {
@@ -41,11 +42,11 @@ public abstract class Figure {
         ChessField field = this.field.getBoard().getField(x, y);
         if (field.getFigure() == null){
             fields.add(field);
-            return true;
+            return false;//we can continue
         }else if(field.getFigure().color != this.color){
             fields.add(field);
         }
-        return false;
+        return true;//end
     }
 
     public List<ChessField> getAccessibleFields(){

@@ -16,19 +16,19 @@ public class Bishop extends Figure{
         List<ChessField> fields = new ArrayList<>();
 
         for (int i = 1; x + i < 8 && y + i < 8; i++){
-            if (addField(x + i, y + i, fields) == false)break;
+            if (addField(x + i, y + i, fields))break;
         }
 
         for (int i = 1; x + i < 8 && y - i >= 0; i++){
-            if (addField(x + i, y - i, fields) == false)break;
+            if (addField(x + i, y - i, fields))break;
         }
 
         for (int i = 1; x - i >= 0 && y + i < 8; i++){
-            if (addField(x - i, y + i, fields) == false)break;
+            if (addField(x - i, y + i, fields))break;
         }
 
         for (int i = 1; x - i >= 0 && y - i >= 0; i++){
-            if (addField(x - i, y - i, fields) == false)break;
+            if (addField(x - i, y - i, fields))break;
         }
 
         return fields;
