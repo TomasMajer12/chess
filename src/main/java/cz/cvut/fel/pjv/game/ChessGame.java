@@ -53,9 +53,9 @@ public class ChessGame {
         board.getField(5,7).setFigure(new Bishop(Color.WHITE,"bishop",board.getField(5,7)));
         board.getField(6,7).setFigure(new Knight(Color.WHITE,"knight",board.getField(6,7)));
         board.getField(7,7).setFigure(new Rook(Color.WHITE,"rook",board.getField(7,7)));
-        for (int i = 0; i < 8;i++ ){
+        /*for (int i = 0; i < 8;i++ ){
             board.getField(i,6).setFigure(new Pawn(Color.WHITE,"pawn",board.getField(i,6)));
-        }
+        }*/
     }
 
     private void updateBoard(ChessBoard board){
