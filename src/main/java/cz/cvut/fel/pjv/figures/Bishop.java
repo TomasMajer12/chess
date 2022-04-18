@@ -14,31 +14,23 @@ public class Bishop extends Figure{
     @Override
     public List<ChessField> AccessibleFields() {
         List<ChessField> fields = new ArrayList<>();
-        for (int i = 1; x + i < 8 && y + i < 8; i++)
-            if (addField(x + i, y + i, fields))
-                break;
-        for (int i = 1; x + i < 8 && y - i >= 0; i++)
-            if (addField(x + i, y - i, fields))
-                break;
-        for (int i = 1; x - i >= 0 && y + i < 8; i++)
-            if (addField(x - i, y + i, fields))
-                break;
-        for (int i = 1; x - i >= 0 && y - i >= 0; i++)
-            if (addField(x - i, y - i, fields))
-                break;
-        return fields;
-    }
 
-    private boolean addField(int x, int y, List<ChessField> fields) {
-        ChessField field = this.field.getBoard().getField(x, y);
-        if (field != null) {
-            if (field.getFigure() == null) {
-                fields.add(field);
-                return false;
-            } else if (field.getFigure().color != this.color) {
-                fields.add(field);
-            }
+        for (int i = 1; x + i < 8 && y + i < 8; i++){
+            if (addField(x + i, y + i, fields) == false)break;
         }
-        return true;
+
+        for (int i = 1; x + i < 8 && y - i >= 0; i++){
+            if (addField(x + i, y - i, fields) == false)break;
+        }
+
+        for (int i = 1; x - i >= 0 && y + i < 8; i++){
+            if (addField(x - i, y + i, fields) == false)break;
+        }
+
+        for (int i = 1; x - i >= 0 && y - i >= 0; i++){
+            if (addField(x - i, y - i, fields) == false)break;
+        }
+
+        return fields;
     }
 }

@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.game;
 
 import cz.cvut.fel.pjv.figures.Figure;
 import cz.cvut.fel.pjv.gui.Utils;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
@@ -12,13 +13,18 @@ public class ChessField extends Label{
     private ChessBoard board;
     Figure figure = null;
     private String whiteDefault = "-fx-background-color: white;-fx-border-style: solid";
-    private String blackDefault = "-fx-background-color: #595959;-fx-border-style: solid";
+    private String blackDefault = "-fx-background-color: #4d4d4d;-fx-border-style: solid";
+    private String whiteEmptySpace = "-fx-background-color: white;-fx-border-style: solid;-fx-border-color: #ec6060;-fx-border-width: 2";
+    private String blackEmptySpace = "-fx-background-color: #4d4d4d;-fx-border-style: solid;-fx-border-color:  #ec6060;-fx-border-width: 2";
+    private String whiteKillSpace = "-fx-background-color: #c05555;-fx-border-style: solid;-fx-border-color:  #ec6060;-fx-border-width: 2";
+    private String blackKillSpace = "-fx-background-color: #6b2a2a;-fx-border-style: solid;-fx-border-color:  #ec6060;-fx-border-width: 2";
 
     public ChessField(ChessBoard board,int x, int y) {
         this.board = board;
         this.x = x;
         this.y = y;
         setDefaultColor();
+        setAlignment(Pos.CENTER);
         setOnMouseEntered(e -> onMouseEntered());
         setOnMouseExited(e -> onMouseExited());
         setMinSize(50, 50);
@@ -37,7 +43,7 @@ public class ChessField extends Label{
         if (figure == null){
             setGraphic(null);
         }else{
-            setGraphic(new ImageView(Utils.loadImage(figure.getImageStream(), 45,45)));
+            setGraphic(new ImageView(Utils.loadImage(figure.getImageStream(), 42,42)));
         }
     }
 
@@ -54,11 +60,11 @@ public class ChessField extends Label{
     }
 
     private void setHighlightEmpty() {
-        setStyle(getColor() ? "-fx-background-color: #fdc4c4;-fx-border-style: solid" : "-fx-background-color: #8a6f6f;-fx-border-style: solid");
+        setStyle(getColor() ? whiteEmptySpace : blackEmptySpace);
     }
 
     private void setHighlightKill() {
-        setStyle(getColor() ? "-fx-background-color: #f80000;-fx-border-style: solid" : "-fx-background-color: #ff0000;-fx-border-style: solid");
+        setStyle(getColor() ? whiteKillSpace : blackKillSpace);
     }
 
     public Figure getFigure() {

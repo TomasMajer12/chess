@@ -42,13 +42,13 @@ public class ChessGame {
         board.getField(6,0).setFigure(new Knight(Color.BLACK,"knight",board.getField(6,0)));
         board.getField(7,0).setFigure(new Rook(Color.BLACK,"rook",board.getField(7,0)));
         for (int i = 0; i < 8;i++ ){
-            board.getField(i,1).setFigure(new Pawn(Color.BLACK,"pawn",board.getField(i,1)));
+            board.getField(i,2).setFigure(new Pawn(Color.BLACK,"pawn",board.getField(i,1)));
         }
 
         board.getField(0,7).setFigure(new Rook(Color.WHITE,"rook",board.getField(0,7)));
         board.getField(1,7).setFigure(new Knight(Color.WHITE,"knight",board.getField(1,7)));
         board.getField(2,7).setFigure(new Bishop(Color.WHITE,"bishop",board.getField(2,7)));
-        board.getField(3,7).setFigure(new Queen(Color.WHITE,"queen",board.getField(3,7)));
+        board.getField(3,4).setFigure(new Queen(Color.WHITE,"queen",board.getField(3,4)));
         board.getField(4,7).setFigure(new King(Color.WHITE,"king",board.getField(4,7)));
         board.getField(5,7).setFigure(new Bishop(Color.WHITE,"bishop",board.getField(5,7)));
         board.getField(6,7).setFigure(new Knight(Color.WHITE,"knight",board.getField(6,7)));

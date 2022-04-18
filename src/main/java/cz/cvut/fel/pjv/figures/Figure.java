@@ -37,6 +37,17 @@ public abstract class Figure {
         return imageStream;
     }
 
+    public boolean addField(int x, int y, List<ChessField> fields) {
+        ChessField field = this.field.getBoard().getField(x, y);
+        if (field.getFigure() == null){
+            fields.add(field);
+            return true;
+        }else if(field.getFigure().color != this.color){
+            fields.add(field);
+        }
+        return false;
+    }
+
     public List<ChessField> getAccessibleFields(){
         List<ChessField> fields= AccessibleFields();
         return fields;
