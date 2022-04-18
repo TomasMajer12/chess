@@ -5,14 +5,16 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+
 public class GameScene extends GridPane {
 
-    public GameScene() {
+    public GameScene(ChessBoard board) {
         setLabels();
         setCorners();
-        add(new ChessBoard(), 1, 1, 8, 8);
+        add(board, 1, 1, 8, 8);
         setAlignment(Pos.CENTER);
     }
+
 
     private void setCorners(){
         add(newCorner(),0,0,1,1);

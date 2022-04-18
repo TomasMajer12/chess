@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.gui;
 
 import cz.cvut.fel.pjv.game.ChessBoard;
+import cz.cvut.fel.pjv.game.ChessGame;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -69,15 +70,7 @@ public class GuiController extends Application{
 
     @FXML
     private void game_start(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) game.getScene().getWindow();
-        BorderPane pane = new BorderPane();
-        pane.setMinSize(700,650);
-        table = new GameScene();
-        pane.setCenter(table);
-        Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+        new ChessGame(game);
     }
 
 }

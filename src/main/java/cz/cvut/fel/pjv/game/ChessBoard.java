@@ -22,6 +22,10 @@ public class ChessBoard extends GridPane {
         }
     }
 
+    public ChessField getField(int x, int y) {
+        return x < 0 || x > 7 || y < 0 || y > 7 ? null : fields[y * 8 + x];
+    }
+
     private int getX(int index) {
         return index % 8;
     }
