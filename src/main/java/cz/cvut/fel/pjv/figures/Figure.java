@@ -39,7 +39,11 @@ public abstract class Figure implements Serializable {
     }
 
     public boolean addField(int x, int y, List<ChessField> fields) {
+
         ChessField field = this.field.getBoard().getField(x, y);
+        if (field == null){
+            return true;
+        }
         if (field.getFigure() == null){
             fields.add(field);
             return false;//we can continue
