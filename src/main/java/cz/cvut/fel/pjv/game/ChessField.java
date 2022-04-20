@@ -5,10 +5,7 @@ import cz.cvut.fel.pjv.gui.Utils;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 
 import java.util.List;
 
@@ -29,6 +26,7 @@ public class ChessField extends Label{
         this.y = y;
         setDefaultColor();
         setAlignment(Pos.CENTER);
+        setOnDragDetected(this::handleDragDetection);
         setOnMouseEntered(e -> onMouseEntered());
         setOnMouseExited(e -> onMouseExited());
         setMinSize(50, 50);
@@ -101,6 +99,14 @@ public class ChessField extends Label{
                 }
             }
         }
+    }
+
+    private void handleDragDetection(MouseEvent e){
+        Dragboard db = startDragAndDrop(TransferMode.ANY);
+        ClipboardContent cb = new ClipboardContent();
+        cb.putImage(Utils.loadImage(figure.getImageStream(), 42,42));
+        db.setContent(cb);
+        e.consume();
     }
 
 }
