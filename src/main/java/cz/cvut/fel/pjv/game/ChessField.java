@@ -27,6 +27,7 @@ public class ChessField extends Label{
         setDefaultColor();
         setAlignment(Pos.CENTER);
         setOnDragDetected(this::handleDragDetection);
+        setOnDragOver(this::handleOnDragOver);
         setOnMouseEntered(e -> onMouseEntered());
         setOnMouseExited(e -> onMouseExited());
         setMinSize(50, 50);
@@ -102,11 +103,30 @@ public class ChessField extends Label{
     }
 
     private void handleDragDetection(MouseEvent e){
-        Dragboard db = startDragAndDrop(TransferMode.ANY);
-        ClipboardContent cb = new ClipboardContent();
-        cb.putImage(Utils.loadImage(figure.getImageStream(), 42,42));
-        db.setContent(cb);
+        List<ChessField> trueFields = figure.getAccessibleFields();
+        if(trueFields != null){
+            Dragboard db = startDragAndDrop(TransferMode.ANY);
+            ClipboardContent cb = new ClipboardContent();
+            db.setDragView(Utils.loadImage(figure.getImageStream(), 42,42));
+            cb.put(Figure.CHESS_FIGURE,figure);
+            db.setContent(cb);
+            for (ChessField field : trueFields) {
+                if (field.figure != null) {
+                    field.setHighlightKill();
+                } else {
+                    field.setHighlightEmpty();
+                }
+            }
+        }
         e.consume();
     }
+
+    private void handleOnDragOver(DragEvent e) {
+        if (e.getDragboard().hasContent(Figure.CHESS_FIGURE)) {
+            e.acceptTransferModes(TransferMode.MOVE);
+        }
+        e.consume();
+    }
+
 
 }
