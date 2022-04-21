@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rook extends Figure{
-    public Rook(Color color, String name, ChessField field) {
+    public Rook(String color, String name, ChessField field) {
         super(color, name, field);
     }
 

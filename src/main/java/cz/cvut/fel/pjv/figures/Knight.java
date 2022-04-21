@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Knight extends Figure{
-    public Knight(Color color, String name, ChessField field) {
+    public Knight(String color, String name, ChessField field) {
         super(color, name, field);
     }
 

@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import java.util.List;
 
 public class Pawn extends Figure{
-    public Pawn(Color color, String name, ChessField field) {
+    public Pawn(String color, String name, ChessField field) {
         super(color, name, field);
     }
 

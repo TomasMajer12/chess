@@ -9,17 +9,18 @@ import java.util.List;
 
 public abstract class Figure implements Serializable {
     public transient static final DataFormat CHESS_FIGURE = new DataFormat("chess.figure");
+    public transient ChessField field; //--> not serializable
+
     int x, y;
-    Color color;
+    String color;
     private final String name;
     private final String imageStream;
-    public ChessField field;
 
-    public Figure(Color color, String name, ChessField field) {
+    public Figure(String color, String name, ChessField field) {
         this.color = color;
         this.name = name;
         this.field = field;
-        if (color == Color.BLACK){
+        if (color == "black"){
             imageStream ="/images/figures/black_" + name + ".png";
         }else {
             imageStream = "/images/figures/white_" + name + ".png";
