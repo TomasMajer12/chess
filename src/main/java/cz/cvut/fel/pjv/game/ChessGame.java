@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class ChessGame {
 
-    private ChessBoard board;
+    public ChessBoard board;
     private GameScene gameScene;
 
     public ChessGame(Button button) {
@@ -48,9 +48,9 @@ public class ChessGame {
         board.getField(5,7).setFigure(new Bishop("white","bishop",board.getField(5,7)));
         board.getField(6,7).setFigure(new Knight("white","knight",board.getField(6,7)));
         board.getField(7,7).setFigure(new Rook("white","rook",board.getField(7,7)));
-        /*for (int i = 0; i < 8;i++ ){
+        for (int i = 0; i < 8;i++ ){
             board.getField(i,6).setFigure(new Pawn("white","pawn",board.getField(i,6)));
-        }*/
+        }
     }
 
     private void updateBoard(ChessBoard board){

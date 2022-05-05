@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.game;
 
 import cz.cvut.fel.pjv.figures.Figure;
+import cz.cvut.fel.pjv.figures.Queen;
 import cz.cvut.fel.pjv.gui.Utils;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -27,7 +28,9 @@ public class ChessField extends Label{
         setDefaultColor();
         setAlignment(Pos.CENTER);
         setOnDragDetected(this::handleDragDetection);
-        setOnDragOver(this::handleOnDragOver);
+        setOnDragOver(this::onDragOver);
+        setOnDragDropped(this::onDragDropped);
+        setOnDragDone(this::onDragDone);
         setOnMouseEntered(e -> onMouseEntered());
         setOnMouseExited(e -> onMouseExited());
         setMinSize(50, 50);
@@ -74,7 +77,7 @@ public class ChessField extends Label{
         return figure;
     }
 
-    private void onMouseExited() {
+    private void onMouseExited(){
         if(figure == null){
             return;
         }
@@ -86,6 +89,10 @@ public class ChessField extends Label{
         }
     }
 
+    private void onMouseExited2(){
+        return;
+    }
+
     private void onMouseEntered() {
         if(figure == null){
             return;
@@ -93,7 +100,7 @@ public class ChessField extends Label{
         List<ChessField> trueFields = figure.getAccessibleFields();
         if (trueFields != null) {
             for (ChessField field : trueFields) {
-                if (field.figure != null) {
+                if (field.figure != null){
                     field.setHighlightKill();
                 } else {
                     field.setHighlightEmpty();
@@ -103,13 +110,19 @@ public class ChessField extends Label{
     }
 
     private void handleDragDetection(MouseEvent e){
+        if(figure == null){
+            return;
+        }
         List<ChessField> trueFields = figure.getAccessibleFields();
         if(trueFields != null){
-            Dragboard db = startDragAndDrop(TransferMode.ANY);
+                
+            setOnMouseExited(a -> onMouseExited2());
+            Dragboard db = startDragAndDrop(TransferMode.MOVE);
+            db.setDragView(Utils.loadImage(figure.getImageStream(), 50,50));
             ClipboardContent cb = new ClipboardContent();
-            db.setDragView(Utils.loadImage(figure.getImageStream(), 42,42));
             cb.put(Figure.CHESS_FIGURE,figure);
             db.setContent(cb);
+
             for (ChessField field : trueFields) {
                 if (field.figure != null) {
                     field.setHighlightKill();
@@ -121,12 +134,41 @@ public class ChessField extends Label{
         e.consume();
     }
 
-    private void handleOnDragOver(DragEvent e) {
+    private void onDragDropped(DragEvent e) {
+        Dragboard db = e.getDragboard();
+        if (db.hasContent(Figure.CHESS_FIGURE)) {
+            Figure source = deserializeFigure(db);
+            source = board.getField(source.getX(), source.getY()).getFigure();
+            if (source.can_move_to(source.getAccessibleFields(),this)) {
+                source.getAccessibleFields().forEach(ChessField::setDefaultColor);
+                source.move(this);
+            }
+        }
+        setOnMouseExited(a -> onMouseExited());
+        e.consume();
+    }
+
+    private void onDragOver(DragEvent e) {
         if (e.getDragboard().hasContent(Figure.CHESS_FIGURE)) {
             e.acceptTransferModes(TransferMode.MOVE);
         }
         e.consume();
     }
 
+    private void onDragDone(DragEvent e) {
+        Dragboard db = e.getDragboard();
+        if (db.hasContent(Figure.CHESS_FIGURE)) {
+            Figure source = deserializeFigure(db);
+            source.getAccessibleFields().forEach(ChessField::setDefaultColor);
+        }
+        e.consume();
+    }
+
+
+    private Figure deserializeFigure(Dragboard db) {
+        Figure source = (Figure) db.getContent(Figure.CHESS_FIGURE);
+        source.setField(this.getBoard().getField(source.getX(), source.getY()));
+        return source;
+    }
 
 }

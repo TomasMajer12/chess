@@ -13,6 +13,16 @@ public class King extends Figure{
 
     @Override
     public List<ChessField> AccessibleFields() {
-        return null;
+        List<ChessField> fields = new ArrayList<>();
+        ChessField field;
+        for (int i = -1; i <= 1; i++ ){
+            for (int j = -1; j <=1; j++){
+                if(((field = this.field.getBoard().getField(x+i,y+j)) != null) && (field.getFigure() == null
+                    || (field.getFigure() != null && field.getFigure().color != this.color)) ){
+                    fields.add(field);
+                }
+            }
+        }
+        return fields;
     }
 }

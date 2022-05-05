@@ -2,7 +2,6 @@ package cz.cvut.fel.pjv.figures;
 
 import cz.cvut.fel.pjv.game.ChessField;
 import javafx.scene.input.DataFormat;
-import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,6 +28,36 @@ public abstract class Figure implements Serializable {
             this.x = field.getX();
             this.y = field.getY();
         }
+    }
+
+    public void setField(ChessField field) {
+        this.field = field;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Figure move(ChessField field) {
+        field.setFigure(this);
+        if (this.field != null) {
+            this.field.setFigure(null);
+        }
+        x = field.getX();
+        y = field.getY();
+        setField(field);
+        return null;
+    }
+
+    public boolean can_move_to(List<ChessField> fields, ChessField new_field){
+        if(fields.contains(new_field)){
+            return true;
+        }
+        return false;
     }
 
     public String getName() {

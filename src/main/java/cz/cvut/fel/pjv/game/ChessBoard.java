@@ -1,12 +1,7 @@
 package cz.cvut.fel.pjv.game;
 
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class ChessBoard extends GridPane {
 
