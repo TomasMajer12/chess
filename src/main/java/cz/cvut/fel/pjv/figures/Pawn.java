@@ -28,7 +28,7 @@ public class Pawn extends Figure{
                 fields.add(attack_fields);
             }
 
-            if(x-1 > 0 && ((attack_fields = this.field.getBoard().getField(x-1,y+1)) != null)
+            if(x-1 >= 0 && ((attack_fields = this.field.getBoard().getField(x-1,y+1)) != null)
                     && attack_fields.getFigure() != null && attack_fields.getFigure().color != this.color){
                 fields.add(attack_fields);
             }
@@ -48,7 +48,7 @@ public class Pawn extends Figure{
                 fields.add(attack_fields);
             }
 
-            if(x-1 > 0 && ((attack_fields = this.field.getBoard().getField(x-1,y-1)) != null)
+            if(x-1 >= 0 && ((attack_fields = this.field.getBoard().getField(x-1,y-1)) != null)
                     && attack_fields.getFigure() != null && attack_fields.getFigure().color != this.color){
                 fields.add(attack_fields);
             }
