@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class Utils {
 
     public static Image loadImage(String resource, int width, int height) {

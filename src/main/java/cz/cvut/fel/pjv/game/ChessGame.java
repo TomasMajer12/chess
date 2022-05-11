@@ -1,21 +1,37 @@
 package cz.cvut.fel.pjv.game;
 
+import cz.cvut.fel.pjv.ChessLoader.ChessXmlLoader;
+import cz.cvut.fel.pjv.ChessLoader.ChessXmlSaver;
 import cz.cvut.fel.pjv.figures.*;
 import cz.cvut.fel.pjv.gui.GameScene;
+import cz.cvut.fel.pjv.gui.Utils;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class ChessGame {
 
     public ChessBoard board;
     private GameScene gameScene;
+    private Thread WhiteTimer;
 
     public ChessGame(Button button) {
+        //TimerThread WT = new TimerThread();
+        //WhiteTimer = new Thread(WT);
+        //WhiteTimer.start();
+
         board = new ChessBoard();
-        starterBoard();
+        ChessXmlLoader LoadXml = new ChessXmlLoader(board);
+        LoadXml.load(LoadXml.loadDataFromFile(new File("file.xml")),board);
+        //starterBoard();
+
+        //ChessXmlSaver SaveXml = new ChessXmlSaver();
+        //SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
+
+
         gameScene = new GameScene(board);
         Stage stage = (Stage) button.getScene().getWindow();
         BorderPane pane = new BorderPane();
@@ -26,6 +42,9 @@ public class ChessGame {
         stage.setScene(scene);
         stage.show();
     }
+
+
+
 
     private void starterBoard(){
         board.getField(0,0).setFigure(new Rook("black","rook",board.getField(0,0)));
@@ -52,10 +71,4 @@ public class ChessGame {
             board.getField(i,6).setFigure(new Pawn("white","pawn",board.getField(i,6)));
         }
     }
-
-    private void updateBoard(ChessBoard board){
-
-    }
-
-
 }

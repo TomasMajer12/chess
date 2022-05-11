@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.figures;
 
 import cz.cvut.fel.pjv.game.ChessField;
+import cz.cvut.fel.pjv.game.ChessGame;
 import javafx.scene.input.DataFormat;
 
 import java.io.Serializable;
@@ -9,6 +10,10 @@ import java.util.List;
 public abstract class Figure implements Serializable {
     public transient static final DataFormat CHESS_FIGURE = new DataFormat("chess.figure");
     public transient ChessField field; //--> not serializable
+
+    public String getColor() {
+        return color;
+    }
 
     int x, y;
     String color;
@@ -21,8 +26,11 @@ public abstract class Figure implements Serializable {
         this.field = field;
         if (color == "black"){
             imageStream ="/images/figures/black_" + name + ".png";
-        }else {
+        }else if(color == "white"){
             imageStream = "/images/figures/white_" + name + ".png";
+        }else{
+            imageStream ="/images/figures/black_" + name + ".png";
+            System.out.println("invalid color\n");
         }
         if (field != null){
             this.x = field.getX();
@@ -50,6 +58,7 @@ public abstract class Figure implements Serializable {
         x = field.getX();
         y = field.getY();
         setField(field);
+        field.getBoard().next_turn();
         return null;
     }
 
@@ -84,9 +93,28 @@ public abstract class Figure implements Serializable {
     }
 
     public List<ChessField> getAccessibleFields(){
+
         List<ChessField> fields= AccessibleFields();
+        if(this.On_turn()){
+            return null;
+        }
         return fields;
     }
+
+    public String getPos() {
+        return ((char) (x + 97)) + "" + ((char) (7 - y + 49));
+    }
+
+
+    public boolean On_turn(){
+        if(this.field.getBoard().Turn_counter % 2 != 0 && this.color == "white"){
+            return true;
+        }else if(this.field.getBoard().Turn_counter % 2 == 0 && this.color == "black"){
+            return true;
+        }
+        return false;
+    }
+
 
 
     public abstract List<ChessField> AccessibleFields();

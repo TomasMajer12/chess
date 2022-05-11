@@ -122,6 +122,8 @@ public class ChessField extends Label{
             ClipboardContent cb = new ClipboardContent();
             cb.put(Figure.CHESS_FIGURE,figure);
             db.setContent(cb);
+            db.setDragViewOffsetX(25);
+            db.setDragViewOffsetY(25);
 
             for (ChessField field : trueFields) {
                 if (field.figure != null) {
