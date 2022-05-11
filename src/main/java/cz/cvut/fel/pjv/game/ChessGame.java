@@ -4,7 +4,6 @@ import cz.cvut.fel.pjv.ChessLoader.ChessXmlLoader;
 import cz.cvut.fel.pjv.ChessLoader.ChessXmlSaver;
 import cz.cvut.fel.pjv.figures.*;
 import cz.cvut.fel.pjv.gui.GameScene;
-import cz.cvut.fel.pjv.gui.Utils;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -18,15 +17,15 @@ public class ChessGame {
     private GameScene gameScene;
     private Thread WhiteTimer;
 
-    public ChessGame(Button button) {
+    public ChessGame(Button button, String game_board) {
         //TimerThread WT = new TimerThread();
         //WhiteTimer = new Thread(WT);
         //WhiteTimer.start();
 
         board = new ChessBoard();
         ChessXmlLoader LoadXml = new ChessXmlLoader(board);
-        LoadXml.loadFromFile(board);
-        //starterBoard();
+        LoadXml.loadFromFile(board,game_board);
+
 
         ChessXmlSaver SaveXml = new ChessXmlSaver();
         SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
@@ -42,8 +41,6 @@ public class ChessGame {
         stage.setScene(scene);
         stage.show();
     }
-
-
 
 
     private void starterBoard(){

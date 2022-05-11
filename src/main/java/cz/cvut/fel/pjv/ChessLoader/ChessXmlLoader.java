@@ -3,18 +3,14 @@ package cz.cvut.fel.pjv.ChessLoader;
 
 import cz.cvut.fel.pjv.figures.*;
 import cz.cvut.fel.pjv.game.ChessBoard;
-import cz.cvut.fel.pjv.gui.Utils;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
 
 
 public class ChessXmlLoader {
@@ -24,11 +20,11 @@ public class ChessXmlLoader {
         this.board = board;
     }
 
-    public void loadFromFile(ChessBoard board) {
+    public void loadFromFile(ChessBoard board, String Filename) {
 
         try {
-            File inputFile = new File(String.valueOf(getClass().getResource("/Starter_board/starter_board.xml")));
 
+            File inputFile = new File(getClass().getResource(Filename).toURI());
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
