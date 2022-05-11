@@ -3,26 +3,19 @@ package cz.cvut.fel.pjv.ChessLoader;
 
 import cz.cvut.fel.pjv.figures.*;
 import cz.cvut.fel.pjv.game.ChessBoard;
-import cz.cvut.fel.pjv.game.ChessGame;
+import cz.cvut.fel.pjv.gui.Utils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import javax.xml.XMLConstants;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Stack;
+import java.io.InputStream;
+import java.net.URL;
+
 
 public class ChessXmlLoader {
     ChessBoard board;
@@ -31,20 +24,19 @@ public class ChessXmlLoader {
         this.board = board;
     }
 
-    public void load(byte[] data, ChessBoard board) {
+    public void loadFromFile(ChessBoard board) {
 
         try {
-            File inputFile = new File("file.xml");
+            File inputFile = new File(String.valueOf(getClass().getResource("/Starter_board/starter_board.xml")));
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
 
             NodeList nList = doc.getElementsByTagName("Figure");
-
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
-
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     Figure figure = createFigure(eElement.getAttribute("Color"),eElement.getAttribute("Type"),
@@ -52,8 +44,6 @@ public class ChessXmlLoader {
                     board.getField(figure.getX(),figure.getY()).setFigure(figure);
                 }
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,14 +88,5 @@ public class ChessXmlLoader {
                 throw new IllegalArgumentException("Unknown Figure:" + type);
         }
         return figure;
-    }
-
-    public byte[] loadDataFromFile(File file) {
-        try {
-            return Files.readAllBytes(Paths.get(file.toURI()));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
     }
 }

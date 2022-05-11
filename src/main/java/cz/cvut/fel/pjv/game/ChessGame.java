@@ -25,11 +25,11 @@ public class ChessGame {
 
         board = new ChessBoard();
         ChessXmlLoader LoadXml = new ChessXmlLoader(board);
-        LoadXml.load(LoadXml.loadDataFromFile(new File("file.xml")),board);
+        LoadXml.loadFromFile(board);
         //starterBoard();
 
-        //ChessXmlSaver SaveXml = new ChessXmlSaver();
-        //SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
+        ChessXmlSaver SaveXml = new ChessXmlSaver();
+        SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
 
 
         gameScene = new GameScene(board);

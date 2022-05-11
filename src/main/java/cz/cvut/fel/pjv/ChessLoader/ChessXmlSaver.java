@@ -23,11 +23,9 @@ public class ChessXmlSaver {
             writer = factory.createXMLStreamWriter(baos);
             writer.writeStartDocument();
             writer.writeStartElement("Board");
-            //writer.writeCharacters("\n\t");
-            saveFigures( board.getFigures("white"), writer);
-            //writer.writeCharacters("\n\t");
+            writer.writeCharacters("\n");
+            saveFigures(board.getFigures("white"), writer);
             saveFigures(board.getFigures("black"), writer);
-            //writer.writeCharacters("\n");
             writer.writeEndElement();
         } catch (XMLStreamException ex) {
             ex.printStackTrace();
@@ -55,13 +53,13 @@ public class ChessXmlSaver {
     private void saveFigures(List<Figure> figures, XMLStreamWriter writer) throws XMLStreamException {
         //writer.writeCharacters("\n");
         for (Figure figure : figures) {
-            //writer.writeCharacters("\t\t");
+            writer.writeCharacters("\t");
             writer.writeEmptyElement("Figure");
             writer.writeAttribute("Type", figure.getName());
             writer.writeAttribute("Color",figure.getColor());
             writer.writeAttribute("PosX",Integer.toString(figure.getX()));
             writer.writeAttribute("PosY",Integer.toString(figure.getY()));
-            //writer.writeCharacters("\n");
+            writer.writeCharacters("\n");
         }
         //writer.writeCharacters("\t");
     }
