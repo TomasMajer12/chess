@@ -1,20 +1,14 @@
 package cz.cvut.fel.pjv.gui;
 
-import cz.cvut.fel.pjv.game.ChessBoard;
 import cz.cvut.fel.pjv.game.ChessGame;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,8 +32,6 @@ public class GuiController extends Application{
 
     @FXML
     private Button new_game,settings,back,load_game,game;
-
-    private GridPane table;
 
     private Utils utils = new Utils();
 
@@ -70,7 +62,7 @@ public class GuiController extends Application{
 
     @FXML
     private void game_start(ActionEvent actionEvent) throws IOException {
-        new ChessGame(game);
+        new ChessGame(game,"/starter_board.xml");
     }
 
 }
