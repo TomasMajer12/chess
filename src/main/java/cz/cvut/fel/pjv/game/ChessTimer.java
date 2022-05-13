@@ -1,23 +1,28 @@
 package cz.cvut.fel.pjv.game;
 
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+
 import static java.lang.Thread.sleep;
 
 public class ChessTimer{
     private long offset, currentStart;
-    private boolean isStopped,running;
+    private boolean isStopped;
+    private String color;
+    private ChessBoard board;
 
-    public ChessTimer(){
+    public ChessTimer(String color,ChessBoard board){
         offset = 0L;
         currentStart = System.currentTimeMillis();
         isStopped = true;
-
+        this.color = color;
+        this.board = board;
     }
 
     public void start() {
         if(isStopped) {
             currentStart = System.currentTimeMillis() - offset;
         }
-        running = true;
         isStopped = false;
     }
 
@@ -29,13 +34,44 @@ public class ChessTimer{
         if(!isStopped) {
             offset = System.currentTimeMillis() - currentStart;
         }
-        running = false;
         isStopped = true;
     }
 
-    public boolean isRunning(){
-        return running;
+    public String get_formated_time(){
+        if(board.Turn_counter % 2 != 0 && color == "white"){
+            if(getTime() < 10){
+                return "0:" + "0" + getTime();
+            }else if(getTime() < 60){
+                return "0:" + getTime();
+            }else if(getTime() >= 60 && getTime()%60 < 10){
+                return getTime()/60 + ":0" + getTime()%60;
+            }else{
+                return getTime()/60 + ":" + getTime()%60;
+            }
+        }else if(board.Turn_counter % 2 == 0 && color == "black"){
+            if(getTime() < 10){
+                return "0:" + "0" + getTime();
+            }else if(getTime() < 60){
+                return "0:" + getTime();
+            }else if(getTime() >= 60 && getTime()%60 < 10){
+                return getTime()/60 + ":0" + getTime()%60;
+            }else{
+                return getTime()/60 + ":" + getTime()%60;
+            }
+        }else{
+            restart();
+            return "0:00";
+        }
     }
+
+    /*public boolean On_turn(){
+        if(this.field.getBoard().Turn_counter % 2 != 0 && this.color == "white"){
+            return true;
+        }else if(this.field.getBoard().Turn_counter % 2 == 0 && this.color == "black"){
+            return true;
+        }
+        return false;
+    }*/
 
     public long getTime() {
         if(!isStopped){
@@ -44,5 +80,6 @@ public class ChessTimer{
             return offset;
         }
     }
+
 }
 

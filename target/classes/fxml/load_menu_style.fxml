@@ -24,9 +24,9 @@
     <center>
         <VBox alignment="CENTER"  BorderPane.alignment="CENTER" styleClass="buttonPanel" stylesheets="@../css/style.css">
             <children>
-                <Button  mnemonicParsing="false" text="SAVE 1" BorderPane.alignment="CENTER"/>
-                <Button  mnemonicParsing="false" text="SAVE 2" BorderPane.alignment="CENTER"/>
-                <Button  mnemonicParsing="false" text="SAVE 3" BorderPane.alignment="CENTER"/>
+                <Button fx:id="save_1" mnemonicParsing="false" text="SAVE 1" BorderPane.alignment="CENTER"/>
+                <Button fx:id="save_2" mnemonicParsing="false" text="SAVE 2" BorderPane.alignment="CENTER"/>
+                <Button fx:id="save_3" mnemonicParsing="false" text="SAVE 3" BorderPane.alignment="CENTER"/>
                 <Button fx:id="back" mnemonicParsing="false" onAction="#change_to_main_menu" text="BACK" BorderPane.alignment="CENTER"/>
             </children>
         </VBox>
