@@ -43,7 +43,7 @@ public class ChessXmlSaver {
     }
 
     public void saveDataToFile(byte[] data, File file) {
-        try {
+        try{
             Files.write(Paths.get(file.toURI()), data);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +51,6 @@ public class ChessXmlSaver {
     }
 
     private void saveFigures(List<Figure> figures, XMLStreamWriter writer) throws XMLStreamException {
-        //writer.writeCharacters("\n");
         for (Figure figure : figures) {
             writer.writeCharacters("\t");
             writer.writeEmptyElement("Figure");
@@ -61,7 +60,6 @@ public class ChessXmlSaver {
             writer.writeAttribute("PosY",Integer.toString(figure.getY()));
             writer.writeCharacters("\n");
         }
-        //writer.writeCharacters("\t");
     }
 
 }

@@ -13,4 +13,6 @@ module cz.cvut.fel.pjv{
     exports cz.cvut.fel.pjv.gui;
     opens cz.cvut.fel.pjv.gui to javafx.fxml;
     exports cz.cvut.fel.pjv;
+    exports cz.cvut.fel.pjv.game;
+    opens cz.cvut.fel.pjv.game to javafx.fxml;
 }

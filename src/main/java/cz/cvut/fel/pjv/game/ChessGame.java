@@ -2,8 +2,6 @@ package cz.cvut.fel.pjv.game;
 
 import cz.cvut.fel.pjv.ChessLoader.ChessXmlLoader;
 import cz.cvut.fel.pjv.ChessLoader.ChessXmlSaver;
-import cz.cvut.fel.pjv.figures.*;
-import cz.cvut.fel.pjv.gui.GameScene;
 
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
@@ -12,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.File;
@@ -19,7 +18,7 @@ import java.io.File;
 public class ChessGame {
 
     public ChessBoard board;
-    private GameScene gameScene;
+    private ChessGameScene gameScene;
     private Label WhiteTimerLabel,BlackTimerLabel;
     private ChessTimer WhiteTimer,BlackTimer;
 
@@ -30,10 +29,9 @@ public class ChessGame {
         LoadXml.loadFromFile(board,game_board);
         board.updateAttackedFields();
 
-
-
         ChessXmlSaver SaveXml = new ChessXmlSaver();
         SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
+
 
         Stage stage = (Stage) button.getScene().getWindow();
         BorderPane pane = prepare_boarder_pane();
@@ -75,9 +73,17 @@ public class ChessGame {
         TimerGrid.setAlignment(Pos.CENTER);
         TimerGrid.setPadding(new Insets(0,50,0,50));
 
+        GridPane options = new GridPane();
+        options.setHgap(10);
+        options.add(ChessGameScene.optionButton(),0,0);
+        options.add(ChessGameScene.optionButton(),2,0);
+        options.add(ChessGameScene.optionButton(),4,0);
+        options.add(ChessGameScene.optionButton(),6,0);
+
+        pane.setTop(options);
         pane.setRight(TimerGrid);
         pane.setAlignment(TimerGrid,Pos.CENTER_LEFT);
-        gameScene = new GameScene(board);
+        gameScene = new ChessGameScene(board);
         pane.setCenter(gameScene);
         pane.setAlignment(gameScene,Pos.CENTER);
         return pane;
