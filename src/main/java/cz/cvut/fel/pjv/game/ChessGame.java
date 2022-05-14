@@ -4,7 +4,7 @@ import cz.cvut.fel.pjv.ChessLoader.ChessXmlLoader;
 import cz.cvut.fel.pjv.ChessLoader.ChessXmlSaver;
 import cz.cvut.fel.pjv.figures.*;
 import cz.cvut.fel.pjv.gui.GameScene;
-import javafx.application.Platform;
+
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,6 +25,25 @@ public class ChessGame {
 
     public ChessGame(Button button, String game_board) {
         board = new ChessBoard();
+        prepare_timers();
+        ChessXmlLoader LoadXml = new ChessXmlLoader(board);
+        LoadXml.loadFromFile(board,game_board);
+        board.updateAttackedFields();
+
+
+
+        ChessXmlSaver SaveXml = new ChessXmlSaver();
+        SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
+
+        Stage stage = (Stage) button.getScene().getWindow();
+        BorderPane pane = prepare_boarder_pane();
+        Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void prepare_timers(){
         WhiteTimer = new ChessTimer("white",board);
         BlackTimer = new ChessTimer("black",board);
 
@@ -44,21 +63,6 @@ public class ChessGame {
         Thread thread2 = new Thread(Black_timer_task);
         thread2.setDaemon(true);
         thread2.start();
-
-        ChessXmlLoader LoadXml = new ChessXmlLoader(board);
-        LoadXml.loadFromFile(board,game_board);
-
-
-        ChessXmlSaver SaveXml = new ChessXmlSaver();
-        SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
-
-
-        Stage stage = (Stage) button.getScene().getWindow();
-        BorderPane pane = prepare_boarder_pane();
-        Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
     }
 
     private BorderPane prepare_boarder_pane(){
@@ -76,7 +80,6 @@ public class ChessGame {
         gameScene = new GameScene(board);
         pane.setCenter(gameScene);
         pane.setAlignment(gameScene,Pos.CENTER);
-
         return pane;
     }
 
@@ -102,30 +105,4 @@ public class ChessGame {
         return task;
     }
 
-
-    private void starterBoard(){
-        board.getField(0,0).setFigure(new Rook("black","rook",board.getField(0,0)));
-        board.getField(1,0).setFigure(new Knight("black","knight",board.getField(1,0)));
-        board.getField(2,0).setFigure(new Bishop("black","bishop",board.getField(2,0)));
-        board.getField(3,0).setFigure(new Queen("black","queen",board.getField(3,0)));
-        board.getField(4,0).setFigure(new King("black","king",board.getField(4,0)));
-        board.getField(5,0).setFigure(new Bishop("black","bishop",board.getField(5,0)));
-        board.getField(6,0).setFigure(new Knight("black","knight",board.getField(6,0)));
-        board.getField(7,0).setFigure(new Rook("black","rook",board.getField(7,0)));
-        for (int i = 0; i < 8;i++ ){
-            board.getField(i,1).setFigure(new Pawn("black","pawn",board.getField(i,1)));
-        }
-
-        board.getField(0,7).setFigure(new Rook("white","rook",board.getField(0,7)));
-        board.getField(1,7).setFigure(new Knight("white","knight",board.getField(1,7)));
-        board.getField(2,7).setFigure(new Bishop("white","bishop",board.getField(2,7)));
-        board.getField(3,7).setFigure(new Queen("white","queen",board.getField(3,7)));
-        board.getField(4,7).setFigure(new King("white","king",board.getField(4,7)));
-        board.getField(5,7).setFigure(new Bishop("white","bishop",board.getField(5,7)));
-        board.getField(6,7).setFigure(new Knight("white","knight",board.getField(6,7)));
-        board.getField(7,7).setFigure(new Rook("white","rook",board.getField(7,7)));
-        for (int i = 0; i < 8;i++ ){
-            board.getField(i,6).setFigure(new Pawn("white","pawn",board.getField(i,6)));
-        }
-    }
 }

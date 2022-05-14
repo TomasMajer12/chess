@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 
 import java.util.List;
+import java.util.Set;
 
 public class ChessField extends Label{
     private final int x,y;
@@ -113,6 +114,7 @@ public class ChessField extends Label{
         if(figure == null){
             return;
         }
+        getBoard().updateAttackedFields();
         List<ChessField> trueFields = figure.getAccessibleFields();
         if(trueFields != null){
                 
@@ -144,6 +146,7 @@ public class ChessField extends Label{
             if (source.can_move_to(source.getAccessibleFields(),this)) {
                 source.getAccessibleFields().forEach(ChessField::setDefaultColor);
                 source.move(this);
+                getBoard().next_turn();
             }
         }
         setOnMouseExited(a -> onMouseExited());

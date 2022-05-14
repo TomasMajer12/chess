@@ -1,10 +1,5 @@
 package cz.cvut.fel.pjv.game;
 
-import javafx.application.Platform;
-import javafx.scene.control.Label;
-
-import static java.lang.Thread.sleep;
-
 public class ChessTimer{
     private long offset, currentStart;
     private boolean isStopped;
@@ -63,15 +58,6 @@ public class ChessTimer{
             return "0:00";
         }
     }
-
-    /*public boolean On_turn(){
-        if(this.field.getBoard().Turn_counter % 2 != 0 && this.color == "white"){
-            return true;
-        }else if(this.field.getBoard().Turn_counter % 2 == 0 && this.color == "black"){
-            return true;
-        }
-        return false;
-    }*/
 
     public long getTime() {
         if(!isStopped){

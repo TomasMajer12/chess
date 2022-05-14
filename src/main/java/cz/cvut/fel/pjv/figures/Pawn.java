@@ -35,7 +35,6 @@ public class Pawn extends Figure{
 
 
         }else{
-
             if((movement_field = this.field.getBoard().getField(x,y-1)) != null && movement_field.getFigure() == null){
                 fields.add(movement_field);
                 if(y == 6 && ((movement_field = this.field.getBoard().getField(x,y-2)) != null) && movement_field.getFigure() == null){
@@ -55,5 +54,30 @@ public class Pawn extends Figure{
 
         }
         return fields;
+    }
+
+    public List<ChessField> can_attack_fields(){
+
+        List<ChessField> attack_fields = new ArrayList<>();
+        ChessField field;
+        if(this.color == "black"){
+
+            if(x+1 < 8 && ((field = this.field.getBoard().getField(x+1,y+1)) != null)){
+                attack_fields.add(field);
+            }
+
+            if(x-1 >= 0 && ((field = this.field.getBoard().getField(x-1,y+1)) != null)){
+                attack_fields.add(field);
+            }
+        }else{
+            if(x+1 < 8 && ((field = this.field.getBoard().getField(x+1,y-1)) != null)){
+                attack_fields.add(field);
+            }
+
+            if(x-1 >= 0 && ((field = this.field.getBoard().getField(x-1,y-1)) != null)){
+                attack_fields.add(field);
+            }
+        }
+        return attack_fields;
     }
 }

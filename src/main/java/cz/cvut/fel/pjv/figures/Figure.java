@@ -1,7 +1,6 @@
 package cz.cvut.fel.pjv.figures;
 
 import cz.cvut.fel.pjv.game.ChessField;
-import cz.cvut.fel.pjv.game.ChessGame;
 import javafx.scene.input.DataFormat;
 
 import java.io.Serializable;
@@ -19,17 +18,20 @@ public abstract class Figure implements Serializable {
     String color;
     private final String name;
     private final String imageStream;
+    private boolean first_move;
 
     public Figure(String color, String name, ChessField field) {
         this.color = color;
         this.name = name;
         this.field = field;
+        this.first_move = true;
+
         if (color == "black"){
             imageStream ="/images/figures/black_" + name + ".png";
         }else if(color == "white"){
             imageStream = "/images/figures/white_" + name + ".png";
         }else{
-            imageStream ="/images/figures/black_" + name + ".png";
+            imageStream = null;
             System.out.println("invalid color\n");
         }
         if (field != null){
@@ -50,23 +52,23 @@ public abstract class Figure implements Serializable {
         return y;
     }
 
-    public Figure move(ChessField field) {
+    public boolean isFirst_move(){
+        return first_move;
+    }
+
+    public void move(ChessField field) {
         field.setFigure(this);
         if (this.field != null) {
             this.field.setFigure(null);
         }
         x = field.getX();
         y = field.getY();
+        first_move = false;
         setField(field);
-        field.getBoard().next_turn();
-        return null;
     }
 
     public boolean can_move_to(List<ChessField> fields, ChessField new_field){
-        if(fields.contains(new_field)){
-            return true;
-        }
-        return false;
+        return fields.contains(new_field);
     }
 
     public String getName() {
@@ -101,11 +103,6 @@ public abstract class Figure implements Serializable {
         return fields;
     }
 
-    public String getPos() {
-        return ((char) (x + 97)) + "" + ((char) (7 - y + 49));
-    }
-
-
     public boolean On_turn(){
         if(this.field.getBoard().Turn_counter % 2 != 0 && this.color == "white"){
             return true;
@@ -115,7 +112,12 @@ public abstract class Figure implements Serializable {
         return false;
     }
 
-
+    public String get_second_color(String color){
+        if (color == "white"){
+            return "black";
+        }
+        return "white";
+    }
 
     public abstract List<ChessField> AccessibleFields();
 
