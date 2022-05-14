@@ -31,7 +31,7 @@ public class GuiController extends Application{
     }
 
     @FXML
-    private Button new_game,settings,back,load_game,game;
+    private Button new_game,settings,back,load_game,game,save_1,save_2,save_3;
 
     private Utils utils = new Utils();
 
@@ -61,8 +61,23 @@ public class GuiController extends Application{
     }
 
     @FXML
-    private void game_start(ActionEvent actionEvent) throws IOException {
+    private void game_start(ActionEvent actionEvent){
         new ChessGame(game,"/starter_board.xml");
+    }
+
+    @FXML
+    private void load_save_1(ActionEvent actionEvent){
+        new ChessGame(save_1,"/saved_games/save_1.xml");
+    }
+
+    @FXML
+    private void load_save_2(ActionEvent actionEvent){
+        new ChessGame(save_2,"/saved_games/save_2.xml");
+    }
+
+    @FXML
+    private void load_save_3(ActionEvent actionEvent){
+        new ChessGame(save_3,"/saved_games/save_3.xml");
     }
 
 }
