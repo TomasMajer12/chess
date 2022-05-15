@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 public class King extends Figure{
+    public int check_count;
     public King(String color, String name, ChessField field) {
         super(color, name, field);
+        this.check_count = 0;
     }
 
     @Override
@@ -31,7 +33,49 @@ public class King extends Figure{
                 }
             }
         }
+
+        if(this.getMove_count() == 0 && check_count == 0){
+            //right
+            ChessField rookfield = field.getBoard().getField(7,y);
+            if(rookfield.getFigure() instanceof Rook && rookfield.getFigure().getMove_count() == 0){
+                boolean canRight = true;
+                for (int i = x+1; i < 7; i++){
+                    ChessField currentfield = field.getBoard().getField(i,y);
+                    if(currentfield.getFigure() != null || attackedFields.contains(currentfield)){
+                        canRight = false;
+                    }
+                }
+                if(canRight){
+                    fields.add(field.getBoard().getField(6,y));
+                }
+            }
+            //left
+            rookfield = field.getBoard().getField(0,y);
+            if(rookfield.getFigure() instanceof Rook && rookfield.getFigure().getMove_count() == 0){
+                boolean canLeft = true;
+                for (int i = x-1; i > 0; i--){
+                    ChessField currentfield = field.getBoard().getField(i,y);
+                    if(currentfield.getFigure() != null || attackedFields.contains(currentfield)){
+                        canLeft  = false;
+                    }
+                }
+                if(canLeft){
+                    fields.add(field.getBoard().getField(2,y));
+                }
+            }
+        }
         return fields;
+    }
+
+    public void castling_rook_move(){
+        if(check_count == 0 && getMove_count() == 0){
+            if(x == 2){
+                field.getBoard().getField(0,y).getFigure().move(field.getBoard().getField(3,y));
+            }else if(x == 6){
+                field.getBoard().getField(7,y).getFigure().move(field.getBoard().getField(5,y));
+            }
+
+        }
     }
 
     public List<ChessField> can_attack_fields(){
@@ -49,6 +93,7 @@ public class King extends Figure{
 
     public boolean isCheck(){
         if(this.field.getBoard().getAttackedFields(this.get_second_color(color)).contains(field)){
+            this.check_count++;
             return true;
         }
         return false;

@@ -18,13 +18,13 @@ public abstract class Figure implements Serializable {
     String color;
     private final String name;
     private final String imageStream;
-    private boolean first_move;
+    private int move_count;
 
     public Figure(String color, String name, ChessField field) {
         this.color = color;
         this.name = name;
         this.field = field;
-        this.first_move = true;
+        this.move_count = 0;
 
         if (color == "black"){
             imageStream ="/images/figures/black_" + name + ".png";
@@ -52,19 +52,25 @@ public abstract class Figure implements Serializable {
         return y;
     }
 
-    public boolean isFirst_move(){
-        return first_move;
+    public int getMove_count(){
+        return move_count;
     }
 
-    public void move(ChessField field) {
-        field.setFigure(this);
+    public void move(ChessField move_field) {
+        move_field.setFigure(this);
         if (this.field != null) {
             this.field.setFigure(null);
         }
-        x = field.getX();
-        y = field.getY();
-        first_move = false;
-        setField(field);
+        x =  move_field.getX();
+        y =  move_field.getY();
+        setField(move_field);
+        if(this instanceof King){
+            ((King) this).castling_rook_move();
+        }
+        if(this instanceof Pawn){
+            ((Pawn) this).enPassant_move();
+        }
+        move_count++;
     }
 
     public boolean can_move_to(List<ChessField> fields, ChessField new_field){
@@ -101,6 +107,10 @@ public abstract class Figure implements Serializable {
             return null;
         }
         return fields;
+    }
+
+    public ChessField getField() {
+        return field;
     }
 
     public boolean On_turn(){

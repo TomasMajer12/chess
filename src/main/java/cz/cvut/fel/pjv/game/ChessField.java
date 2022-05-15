@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.game;
 
 import cz.cvut.fel.pjv.figures.Figure;
+import cz.cvut.fel.pjv.figures.Pawn;
 import cz.cvut.fel.pjv.figures.Queen;
 import cz.cvut.fel.pjv.gui.Utils;
 import javafx.geometry.Pos;
