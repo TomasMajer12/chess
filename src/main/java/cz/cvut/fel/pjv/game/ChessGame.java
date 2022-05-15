@@ -1,19 +1,25 @@
 package cz.cvut.fel.pjv.game;
 
 import cz.cvut.fel.pjv.ChessLoader.ChessXmlLoader;
-import cz.cvut.fel.pjv.ChessLoader.ChessXmlSaver;
 
+import cz.cvut.fel.pjv.gui.ChessGameScene;
+import cz.cvut.fel.pjv.gui.SaveBarMenu;
+import cz.cvut.fel.pjv.gui.Utils;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.File;
+import java.io.IOException;
 
 public class ChessGame {
 
@@ -22,15 +28,14 @@ public class ChessGame {
     private Label WhiteTimerLabel,BlackTimerLabel;
     private ChessTimer WhiteTimer,BlackTimer;
 
-    public ChessGame(Button button, String game_board) {
-        board = new ChessBoard();
+    public ChessGame(Button button, String game_board, Boolean cooperative) {
+        board = new ChessBoard(cooperative);
         prepare_timers();
+
         ChessXmlLoader LoadXml = new ChessXmlLoader(board);
         LoadXml.loadFromFile(board,game_board);
-        board.updateAttackedFields();
 
-        ChessXmlSaver SaveXml = new ChessXmlSaver();
-        SaveXml.saveDataToFile(SaveXml.save(board), new File("file.xml"));
+        board.updateAttackedFields();
 
 
         Stage stage = (Stage) button.getScene().getWindow();
@@ -73,12 +78,38 @@ public class ChessGame {
         TimerGrid.setAlignment(Pos.CENTER);
         TimerGrid.setPadding(new Insets(0,50,0,50));
 
+
+        Menu SaveMenu = new SaveBarMenu(board);
+        SaveMenu.setGraphic(new ImageView(Utils.loadImage("/images/icons/save_icon.png",30,30)));
+
+        Button save = ChessGameScene.optionButton("/images/icons/save_icon.png");
+        Button reset = ChessGameScene.optionButton("/images/icons/reset_icon.png");
+        Button exit = ChessGameScene.optionButton("/images/icons/exit_icon.png");
+
+        reset.setOnAction((EventHandler) event -> new ChessGame(reset, "/saved_games/starter_board.xml",false));
+        exit.setOnAction((EventHandler) event -> {
+            try {
+                new Utils().change_scene(exit,"/fxml/menu_style.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        MenuBar mb = new MenuBar();
+        mb.setMinSize(50,50);
+        mb.setMaxSize(50,50);
+        mb.setStyle("-fx-background-color: rgba(255,238,238,0)");
+
+
+        mb.getMenus().add(SaveMenu);
         GridPane options = new GridPane();
-        options.setHgap(10);
-        options.add(ChessGameScene.optionButton(),0,0);
-        options.add(ChessGameScene.optionButton(),2,0);
-        options.add(ChessGameScene.optionButton(),4,0);
-        options.add(ChessGameScene.optionButton(),6,0);
+        options.setPadding(new Insets(20,0,0,20));
+        options.setHgap(20);
+        options.setVgap(20);
+        options.add(exit,0,0);
+        options.add(mb,1,0);
+        options.add(ChessGameScene.optionButton("/images/icons/save_icon.png"),2,0);
+        options.add(reset,3,0);
 
         pane.setTop(options);
         pane.setRight(TimerGrid);

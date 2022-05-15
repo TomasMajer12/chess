@@ -1,6 +1,6 @@
-package cz.cvut.fel.pjv.game;
+package cz.cvut.fel.pjv.gui;
 
-import cz.cvut.fel.pjv.gui.Utils;
+import cz.cvut.fel.pjv.game.ChessBoard;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -57,10 +57,11 @@ public class ChessGameScene extends GridPane {
         return l;
     }
 
-    static Button optionButton(){
+    public static Button optionButton(String pathToImage){
         Button button = new Button();
+        button.getStyleClass().add("optionButton");
         button.setStyle("-fx-background-color: rgba(255,238,238,0)");
-        button.setGraphic(new ImageView(Utils.loadImage("/images/save_icon.png",50,50)));
+        button.setGraphic(new ImageView(Utils.loadImage(pathToImage,30,30)));
         button.setMinSize(50,50);
         button.setMaxSize(50,50);
         return button;

@@ -21,7 +21,7 @@ public class GuiController extends Application{
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu_style.fxml"));
         primaryStage.setTitle("Chess");
-        primaryStage.getIcons().add(Utils.loadImage("/images/icon.png",25,25));
+        primaryStage.getIcons().add(Utils.loadImage("/images/icons/game_icon.png",25,25));
         primaryStage.setMinHeight(650);
         primaryStage.setMinWidth(700);
         Scene main_menu = new Scene(root);
@@ -31,53 +31,57 @@ public class GuiController extends Application{
     }
 
     @FXML
-    private Button new_game,settings,back,load_game,game,save_1,save_2,save_3;
+    private Button new_game,settings,back,load_game,game,save_1,save_2,save_3,coop;
 
     private Utils utils = new Utils();
 
     @FXML
-    private void change_to_new_game(ActionEvent actionEvent) throws IOException {
+    private void change_to_new_game() throws IOException {
         utils.change_scene(new_game,"/fxml/new_game_style.fxml");
     }
 
     @FXML
-    private void change_to_settings(ActionEvent actionEvent) throws IOException {
+    private void change_to_settings() throws IOException {
         utils.change_scene(settings,"/fxml/settings_style.fxml");
     }
 
     @FXML
-    private void change_to_main_menu(ActionEvent actionEvent) throws IOException {
+    private void change_to_main_menu() throws IOException {
         utils.change_scene(back,"/fxml/menu_style.fxml");
     }
 
     @FXML
-    private void change_to_load_game(ActionEvent actionEvent) throws IOException{
+    private void change_to_load_game() throws IOException{
         utils.change_scene(load_game,"/fxml/load_menu_style.fxml");
     }
 
     @FXML
-    private void exit_game(ActionEvent actionEvent) {
+    private void exit_game() {
         Platform.exit();
     }
 
     @FXML
-    private void game_start(ActionEvent actionEvent){
-        new ChessGame(game,"/starter_board.xml");
+    private void game_start(){
+        new ChessGame(game, "/saved_games/starter_board.xml",false);
     }
 
     @FXML
-    private void load_save_1(ActionEvent actionEvent){
-        new ChessGame(save_1,"/saved_games/save_1.xml");
+    private void load_save_1(){
+        new ChessGame(save_1,"/saved_games/save_1.xml",false);
     }
 
     @FXML
-    private void load_save_2(ActionEvent actionEvent){
-        new ChessGame(save_2,"/saved_games/save_2.xml");
+    private void load_save_2(){
+        new ChessGame(save_2,"/saved_games/save_2.xml",false);
     }
 
     @FXML
-    private void load_save_3(ActionEvent actionEvent){
-        new ChessGame(save_3,"/saved_games/save_3.xml");
+    private void load_save_3(){
+        new ChessGame(save_3,"/saved_games/save_3.xml",false);
     }
 
+    @FXML
+    public void load_coop_game() {
+        new ChessGame(coop, "/saved_games/starter_board.xml",true);
+    }
 }

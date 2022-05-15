@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.game;
 
 import cz.cvut.fel.pjv.figures.*;
 
+import cz.cvut.fel.pjv.gui.AddFigureContexMenu;
 import javafx.scene.layout.GridPane;
 import java.util.*;
 
@@ -13,11 +14,15 @@ public class ChessBoard extends GridPane {
     private Set<ChessField> BlackAttackedFields = new HashSet<>();
     private Map<String, Set<ChessField>> attackedFields = new HashMap<>();
     public int Turn_counter;
-    public ChessBoard() {
+    public ChessBoard(Boolean cooperative) {
         for (int i = 0; i < 64; i++) {
             int x = getX(i);
             int y = getY(i);
             ChessField field = new ChessField(this, x, y);
+            if(cooperative){
+                AddFigureContexMenu menu= new AddFigureContexMenu(field);
+                field.setContextMenu(menu);
+            }
             add(field, x, y);
             fields[i] = field;
         }

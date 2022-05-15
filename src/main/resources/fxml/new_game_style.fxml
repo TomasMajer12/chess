@@ -25,13 +25,9 @@
         <VBox alignment="CENTER"  BorderPane.alignment="CENTER" styleClass="buttonPanel" stylesheets="@../css/style.css">
             <children>
                 <Button mnemonicParsing="false" fx:id="game" text="PLAYER VS PLAYER" onAction="#game_start" BorderPane.alignment="CENTER"/>
-                <Label text="PLAYER VS AI">
-                    <font>
-                        <Font size="45.0" />
-                    </font>
-                </Label>
                 <Button mnemonicParsing="false"  text="EASY" BorderPane.alignment="CENTER"/>
                 <Button mnemonicParsing="false"  text="HARD" BorderPane.alignment="CENTER"/>
+                <Button mnemonicParsing="false"  fx:id="coop" text="COOPERATIVE" onAction="#load_coop_game" BorderPane.alignment="CENTER"/>
                 <Button  fx:id="back" mnemonicParsing="false" onAction="#change_to_main_menu" text="BACK" BorderPane.alignment="CENTER"/>
             </children>
         </VBox>
