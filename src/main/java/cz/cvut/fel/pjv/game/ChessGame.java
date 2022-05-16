@@ -26,15 +26,24 @@ public class ChessGame {
     private Label WhiteTimerLabel,BlackTimerLabel;
     private ChessTimer WhiteTimer,BlackTimer;
 
-    public ChessGame(Button button, String game_board, Boolean cooperative) {
-        board = new ChessBoard(cooperative);
+    private boolean cooperative,AI_game;
+
+    public ChessGame(Button button, String game_board, boolean cooperative,boolean AI_game) {
+        this.cooperative = cooperative;
+        this.AI_game = AI_game;
+
+        if(AI_game){
+            board = new ChessBoard(cooperative,AI_game);
+        }else{
+            board = new ChessBoard(cooperative);
+        }
         prepare_timers();
+
 
         ChessXmlLoader LoadXml = new ChessXmlLoader(board);
         LoadXml.loadFromFile(board,game_board);
 
         board.updateAttackedFields();
-
 
         Stage stage = (Stage) button.getScene().getWindow();
         BorderPane pane = prepare_boarder_pane();
@@ -75,8 +84,6 @@ public class ChessGame {
         TimerGrid.getChildren().add(BlackTimerLabel);
         TimerGrid.setAlignment(Pos.CENTER);
         TimerGrid.setPadding(new Insets(0,50,0,50));
-
-
         GridPane options = prepare_options_menu();
 
         pane.setTop(options);
@@ -99,7 +106,7 @@ public class ChessGame {
         Button reset = ChessGameScene.optionButton("/images/icons/reset_icon.png");
         Button exit = ChessGameScene.optionButton("/images/icons/exit_icon.png");
 
-        reset.setOnAction((EventHandler) event -> new ChessGame(reset, "/saved_games/starter_board.xml",false));
+        reset.setOnAction((EventHandler) event -> new ChessGame(reset, "/saved_games/starter_board.xml",cooperative,AI_game));
         exit.setOnAction((EventHandler) event -> {
             try {
                 new Utils().change_scene(exit,"/fxml/menu_style.fxml");

@@ -31,7 +31,7 @@ public class GuiController extends Application{
     }
 
     @FXML
-    private Button new_game,settings,back,load_game,game,save_1,save_2,save_3,coop;
+    private Button new_game,settings,back,load_game,game,save_1,save_2,save_3,coop,AIgame;
 
     private Utils utils = new Utils();
 
@@ -62,26 +62,30 @@ public class GuiController extends Application{
 
     @FXML
     private void game_start(){
-        new ChessGame(game, "/saved_games/starter_board.xml",false);
+        new ChessGame(game, "/saved_games/starter_board.xml",false,false);
     }
 
     @FXML
     private void load_save_1(){
-        new ChessGame(save_1,"/saved_games/save_1.xml",false);
+        new ChessGame(save_1,"/saved_games/save_1.xml",false,false);
     }
 
     @FXML
     private void load_save_2(){
-        new ChessGame(save_2,"/saved_games/save_2.xml",false);
+        new ChessGame(save_2,"/saved_games/save_2.xml",false,false);
     }
 
     @FXML
     private void load_save_3(){
-        new ChessGame(save_3,"/saved_games/save_3.xml",false);
+        new ChessGame(save_3,"/saved_games/save_3.xml",false,false);
     }
 
     @FXML
     public void load_coop_game() {
-        new ChessGame(coop, "/saved_games/starter_board.xml",true);
+        new ChessGame(coop, "/saved_games/starter_board.xml",true,false);
+    }
+
+    public void ai_game_start() {
+        new ChessGame(AIgame, "/saved_games/starter_board.xml",false,true);
     }
 }

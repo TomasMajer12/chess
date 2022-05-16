@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.game;
 
+import cz.cvut.fel.pjv.AI.SimpleAI;
 import cz.cvut.fel.pjv.figures.*;
 
 import cz.cvut.fel.pjv.gui.AddFigureContexMenu;
@@ -14,7 +15,23 @@ public class ChessBoard extends GridPane {
     private Set<ChessField> BlackAttackedFields = new HashSet<>();
     private Map<String, Set<ChessField>> attackedFields = new HashMap<>();
     public int Turn_counter;
-    public ChessBoard(Boolean cooperative) {
+    private boolean AI;
+    private SimpleAI ai_player;
+    public ChessBoard(boolean cooperative) {
+        prepare_board(cooperative);
+        Turn_counter = 0;
+        AI = false;
+    }
+
+    public ChessBoard(boolean cooperative, boolean AI) {
+        System.out.println("Starting AI game");
+        prepare_board(cooperative);
+        this.AI = AI;
+        ai_player = new SimpleAI(this,"black");
+        Turn_counter = 0;
+    }
+
+    public void prepare_board(boolean cooperative){
         for (int i = 0; i < 64; i++) {
             int x = getX(i);
             int y = getY(i);
@@ -26,7 +43,6 @@ public class ChessBoard extends GridPane {
             add(field, x, y);
             fields[i] = field;
         }
-        Turn_counter = 0;
     }
 
     public void clear_board(){
@@ -43,6 +59,14 @@ public class ChessBoard extends GridPane {
         updateAttackedFields();
         state_test();
         Turn_counter++;
+        System.out.println(AI);
+        if(AI){
+            System.out.println("Ai makes move");
+            ai_player.make_move();
+            Turn_counter++;
+            updateAttackedFields();
+            state_test();
+        }
         updateAttackedFields();
         state_test();
     }

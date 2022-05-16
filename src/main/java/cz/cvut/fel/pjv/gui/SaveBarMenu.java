@@ -17,21 +17,21 @@ public class SaveBarMenu extends MenuButton {
         this.board = board;
         getStyleClass().add("MenuButton");
 
-        getItems().add(new item("Save 1", e-> {
+        getItems().add(new item("Save game to save 1", e-> {
             try {
                 save_game("/saved_games/save_1.xml");
             } catch (URISyntaxException ex) {
                 ex.printStackTrace();
             }
         }));
-        getItems().add(new item("Save 2", e-> {
+        getItems().add(new item("Save game to save 2", e-> {
             try {
                 save_game("/saved_games/save_2.xml");
             } catch (URISyntaxException ex) {
                 ex.printStackTrace();
             }
         }));
-        getItems().add(new item("Save 3", e-> {
+        getItems().add(new item("Save game to save 3", e-> {
             try {
                 save_game("/saved_games/save_3.xml");
             } catch (URISyntaxException ex) {

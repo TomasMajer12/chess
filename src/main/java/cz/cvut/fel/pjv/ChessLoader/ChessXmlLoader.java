@@ -23,7 +23,6 @@ public class ChessXmlLoader {
     public void loadFromFile(ChessBoard board, String Filename) {
 
         try {
-
             File inputFile = new File(getClass().getResource(Filename).toURI());
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
