@@ -29,6 +29,12 @@ public class ChessBoard extends GridPane {
         Turn_counter = 0;
     }
 
+    public void clear_board(){
+        for (ChessField field: fields){
+            field.setFigure(null);
+        }
+    }
+
     public ChessField getField(int x, int y) {
         return x < 0 || x > 7 || y < 0 || y > 7 ? null : fields[y * 8 + x];
     }

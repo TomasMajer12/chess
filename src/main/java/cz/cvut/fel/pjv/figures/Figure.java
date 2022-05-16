@@ -94,7 +94,7 @@ public abstract class Figure implements Serializable {
         if (field.getFigure() == null){
             fields.add(field);
             return false;//we can continue
-        }else if(field.getFigure().color != this.color){
+        }else{
             fields.add(field);
         }
         return true;//end

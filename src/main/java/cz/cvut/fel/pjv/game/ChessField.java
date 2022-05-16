@@ -102,7 +102,9 @@ public class ChessField extends Label{
         List<ChessField> trueFields = figure.getAccessibleFields();
         if (trueFields != null) {
             for (ChessField field : trueFields) {
-                if (field.figure != null){
+                if(field.getFigure() != null && field.getFigure().getColor() == figure.getColor()){
+                    continue;
+                }else if (field.figure != null) {
                     field.setHighlightKill();
                 } else {
                     field.setHighlightEmpty();
@@ -129,7 +131,9 @@ public class ChessField extends Label{
             db.setDragViewOffsetY(25);
 
             for (ChessField field : trueFields) {
-                if (field.figure != null) {
+                if(field.getFigure() != null && field.getFigure().getColor() == figure.getColor()){
+                    continue;
+                }else if (field.figure != null) {
                     field.setHighlightKill();
                 } else {
                     field.setHighlightEmpty();

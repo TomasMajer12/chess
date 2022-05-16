@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.game;
 import cz.cvut.fel.pjv.ChessLoader.ChessXmlLoader;
 
 import cz.cvut.fel.pjv.gui.ChessGameScene;
+import cz.cvut.fel.pjv.gui.LoadBarMenu;
 import cz.cvut.fel.pjv.gui.SaveBarMenu;
 import cz.cvut.fel.pjv.gui.Utils;
 import javafx.concurrent.Task;
@@ -10,10 +11,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -79,10 +77,25 @@ public class ChessGame {
         TimerGrid.setPadding(new Insets(0,50,0,50));
 
 
-        Menu SaveMenu = new SaveBarMenu(board);
-        SaveMenu.setGraphic(new ImageView(Utils.loadImage("/images/icons/save_icon.png",30,30)));
+        GridPane options = prepare_options_menu();
 
-        Button save = ChessGameScene.optionButton("/images/icons/save_icon.png");
+        pane.setTop(options);
+        pane.setRight(TimerGrid);
+        pane.setAlignment(TimerGrid,Pos.CENTER_LEFT);
+        gameScene = new ChessGameScene(board);
+        pane.setCenter(gameScene);
+        pane.setAlignment(gameScene,Pos.CENTER);
+        return pane;
+    }
+
+    private GridPane prepare_options_menu(){
+
+        GridPane options = new GridPane();
+        MenuButton SaveMenu = new SaveBarMenu(board);
+        MenuButton LoadMenu = new LoadBarMenu(board);
+        SaveMenu.setGraphic(new ImageView(Utils.loadImage("/images/icons/save_icon.png",30,30)));
+        LoadMenu.setGraphic(new ImageView(Utils.loadImage("/images/icons/load_icon.png",30,30)));
+
         Button reset = ChessGameScene.optionButton("/images/icons/reset_icon.png");
         Button exit = ChessGameScene.optionButton("/images/icons/exit_icon.png");
 
@@ -94,30 +107,14 @@ public class ChessGame {
                 e.printStackTrace();
             }
         });
-
-        MenuBar mb = new MenuBar();
-        mb.setMinSize(50,50);
-        mb.setMaxSize(50,50);
-        mb.setStyle("-fx-background-color: rgba(255,238,238,0)");
-
-
-        mb.getMenus().add(SaveMenu);
-        GridPane options = new GridPane();
         options.setPadding(new Insets(20,0,0,20));
         options.setHgap(20);
         options.setVgap(20);
         options.add(exit,0,0);
-        options.add(mb,1,0);
-        options.add(ChessGameScene.optionButton("/images/icons/save_icon.png"),2,0);
+        options.add(SaveMenu,1,0);
+        options.add(LoadMenu,2,0);
         options.add(reset,3,0);
-
-        pane.setTop(options);
-        pane.setRight(TimerGrid);
-        pane.setAlignment(TimerGrid,Pos.CENTER_LEFT);
-        gameScene = new ChessGameScene(board);
-        pane.setCenter(gameScene);
-        pane.setAlignment(gameScene,Pos.CENTER);
-        return pane;
+        return options;
     }
 
     private Label Timer_label(){
