@@ -5,13 +5,15 @@ public class ChessTimer{
     private boolean isStopped;
     private String color;
     private ChessBoard board;
+    private int maxTime;
 
-    public ChessTimer(String color,ChessBoard board){
+    public ChessTimer(String color,ChessBoard board,int maxTime){
         offset = 0L;
         currentStart = System.currentTimeMillis();
         isStopped = true;
         this.color = color;
         this.board = board;
+        this.maxTime = maxTime;
     }
 
     public void start() {
@@ -33,25 +35,26 @@ public class ChessTimer{
     }
 
     public String get_formated_time(){
+        long currentTime = maxTime - getTime();
         if(board.Turn_counter % 2 != 0 && color == "white"){
-            if(getTime() < 10){
-                return "0:" + "0" + getTime();
-            }else if(getTime() < 60){
-                return "0:" + getTime();
-            }else if(getTime() >= 60 && getTime()%60 < 10){
-                return getTime()/60 + ":0" + getTime()%60;
+            if(currentTime < 10){
+                return "0:" + "0" + currentTime;
+            }else if(currentTime < 60){
+                return "0:" + currentTime;
+            }else if(currentTime >= 60 && currentTime%60 < 10){
+                return currentTime/60 + ":0" + currentTime%60;
             }else{
-                return getTime()/60 + ":" + getTime()%60;
+                return currentTime/60 + ":" + currentTime%60;
             }
         }else if(board.Turn_counter % 2 == 0 && color == "black"){
-            if(getTime() < 10){
-                return "0:" + "0" + getTime();
-            }else if(getTime() < 60){
-                return "0:" + getTime();
-            }else if(getTime() >= 60 && getTime()%60 < 10){
-                return getTime()/60 + ":0" + getTime()%60;
+            if(currentTime < 10){
+                return "0:" + "0" + currentTime;
+            }else if(currentTime < 60){
+                return "0:" + currentTime;
+            }else if(currentTime >= 60 && currentTime%60 < 10){
+                return currentTime/60 + ":0" + currentTime%60;
             }else{
-                return getTime()/60 + ":" + getTime()%60;
+                return currentTime/60 + ":" + currentTime%60;
             }
         }else{
             restart();

@@ -27,10 +27,12 @@ public class ChessGame {
     private ChessTimer WhiteTimer,BlackTimer;
 
     private boolean cooperative,AI_game;
+    private int maxTime;
 
-    public ChessGame(Button button, String game_board, boolean cooperative,boolean AI_game) {
+    public ChessGame(Button button, String game_board, boolean cooperative,boolean AI_game,int maxTime) {
         this.cooperative = cooperative;
         this.AI_game = AI_game;
+        this.maxTime = maxTime;
 
         if(AI_game){
             board = new ChessBoard(cooperative,AI_game);
@@ -54,8 +56,8 @@ public class ChessGame {
     }
 
     private void prepare_timers(){
-        WhiteTimer = new ChessTimer("white",board);
-        BlackTimer = new ChessTimer("black",board);
+        WhiteTimer = new ChessTimer("white",board,125);
+        BlackTimer = new ChessTimer("black",board,125);
 
         WhiteTimerLabel = Timer_label();
         BlackTimerLabel = Timer_label();
@@ -106,7 +108,7 @@ public class ChessGame {
         Button reset = ChessGameScene.optionButton("/images/icons/reset_icon.png");
         Button exit = ChessGameScene.optionButton("/images/icons/exit_icon.png");
 
-        reset.setOnAction((EventHandler) event -> new ChessGame(reset, "/saved_games/starter_board.xml",cooperative,AI_game));
+        reset.setOnAction((EventHandler) event -> new ChessGame(reset, "/saved_games/starter_board.xml",cooperative,AI_game,maxTime));
         exit.setOnAction((EventHandler) event -> {
             try {
                 new Utils().change_scene(exit,"/fxml/menu_style.fxml");
