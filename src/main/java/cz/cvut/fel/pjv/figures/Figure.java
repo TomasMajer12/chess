@@ -69,6 +69,7 @@ public abstract class Figure implements Serializable {
         }
         if(this instanceof Pawn){
             ((Pawn) this).enPassant_move();
+            ((Pawn) this).reach_end_of_board();
         }
         move_count++;
     }

@@ -1,6 +1,18 @@
 package cz.cvut.fel.pjv.figures;
 
 import cz.cvut.fel.pjv.game.ChessField;
+import cz.cvut.fel.pjv.gui.PawnPopUpStage;
+import cz.cvut.fel.pjv.gui.Utils;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,5 +136,13 @@ public class Pawn extends Figure{
             }
         }
         return attack_fields;
+    }
+
+    public void reach_end_of_board(){
+        if(this.color == "black" && field.getY() == 7){
+            new PawnPopUpStage(this);
+        }else if (this.color == "white" && field.getY() == 0){
+            new PawnPopUpStage(this);
+        }
     }
 }

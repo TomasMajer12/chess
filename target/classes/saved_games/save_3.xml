@@ -1,9 +1,9 @@
 <?xml version="1.0" ?><Board>
-	<Figure Type="pawn" Color="white" PosX="0" PosY="4"/>
-	<Figure Type="pawn" Color="white" PosX="1" PosY="4"/>
-	<Figure Type="pawn" Color="white" PosX="2" PosY="4"/>
-	<Figure Type="pawn" Color="white" PosX="3" PosY="4"/>
-	<Figure Type="pawn" Color="white" PosX="4" PosY="4"/>
+	<Figure Type="pawn" Color="white" PosX="0" PosY="6"/>
+	<Figure Type="pawn" Color="white" PosX="1" PosY="6"/>
+	<Figure Type="pawn" Color="white" PosX="2" PosY="6"/>
+	<Figure Type="pawn" Color="white" PosX="3" PosY="6"/>
+	<Figure Type="pawn" Color="white" PosX="4" PosY="6"/>
 	<Figure Type="pawn" Color="white" PosX="5" PosY="6"/>
 	<Figure Type="pawn" Color="white" PosX="6" PosY="6"/>
 	<Figure Type="pawn" Color="white" PosX="7" PosY="6"/>
@@ -23,12 +23,12 @@
 	<Figure Type="bishop" Color="black" PosX="5" PosY="0"/>
 	<Figure Type="knight" Color="black" PosX="6" PosY="0"/>
 	<Figure Type="rook" Color="black" PosX="7" PosY="0"/>
+	<Figure Type="pawn" Color="black" PosX="0" PosY="1"/>
+	<Figure Type="pawn" Color="black" PosX="1" PosY="1"/>
+	<Figure Type="pawn" Color="black" PosX="2" PosY="1"/>
+	<Figure Type="pawn" Color="black" PosX="3" PosY="1"/>
+	<Figure Type="pawn" Color="black" PosX="4" PosY="1"/>
 	<Figure Type="pawn" Color="black" PosX="5" PosY="1"/>
 	<Figure Type="pawn" Color="black" PosX="6" PosY="1"/>
 	<Figure Type="pawn" Color="black" PosX="7" PosY="1"/>
-	<Figure Type="pawn" Color="black" PosX="0" PosY="3"/>
-	<Figure Type="pawn" Color="black" PosX="1" PosY="3"/>
-	<Figure Type="pawn" Color="black" PosX="2" PosY="3"/>
-	<Figure Type="pawn" Color="black" PosX="3" PosY="3"/>
-	<Figure Type="pawn" Color="black" PosX="4" PosY="3"/>
 </Board>

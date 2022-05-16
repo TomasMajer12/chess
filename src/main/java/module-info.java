@@ -8,6 +8,7 @@ module cz.cvut.fel.pjv{
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.logging;
 
     opens cz.cvut.fel.pjv to javafx.fxml;
     exports cz.cvut.fel.pjv.gui;

@@ -37,8 +37,8 @@ public class ChessGame {
         }else{
             board = new ChessBoard(cooperative);
         }
-        prepare_timers();
 
+        prepare_timers();
 
         ChessXmlLoader LoadXml = new ChessXmlLoader(board);
         LoadXml.loadFromFile(board,game_board);

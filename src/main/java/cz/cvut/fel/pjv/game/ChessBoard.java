@@ -4,8 +4,20 @@ import cz.cvut.fel.pjv.AI.SimpleAI;
 import cz.cvut.fel.pjv.figures.*;
 
 import cz.cvut.fel.pjv.gui.AddFigureContexMenu;
+import cz.cvut.fel.pjv.gui.Utils;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.*;
 
 
 public class ChessBoard extends GridPane {
@@ -17,6 +29,9 @@ public class ChessBoard extends GridPane {
     public int Turn_counter;
     private boolean AI;
     private SimpleAI ai_player;
+    public Logger LOG = Logger.getLogger(ChessBoard.class.getName());
+
+
     public ChessBoard(boolean cooperative) {
         prepare_board(cooperative);
         Turn_counter = 0;
@@ -32,6 +47,8 @@ public class ChessBoard extends GridPane {
     }
 
     public void prepare_board(boolean cooperative){
+        LOG.addHandler(new StreamHandler(System.out, new SimpleFormatter()));
+
         for (int i = 0; i < 64; i++) {
             int x = getX(i);
             int y = getY(i);
@@ -43,6 +60,7 @@ public class ChessBoard extends GridPane {
             add(field, x, y);
             fields[i] = field;
         }
+        LOG.log(Level.INFO,"Board Created");
     }
 
     public void clear_board(){
@@ -81,7 +99,29 @@ public class ChessBoard extends GridPane {
             if (king.isCheck()){
                 System.out.println("check" + getTurn());
             }
-        }
+        }/*else{
+            *//*System.out.println("Color " + getTurn() +" wins");
+            Stage popupwindow=new Stage();
+            popupwindow.initModality(Modality.APPLICATION_MODAL);
+            popupwindow.setTitle("This is a pop up window");
+            Label label1= new Label("Pop up window now displayed");
+            Button button1= new Button("Close this pop up window");
+            button1.setOnAction((EventHandler) event -> {
+                try {
+                    new Utils().change_scene(button1,"/fxml/menu_style.fxml");
+                    popupwindow.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            VBox layout= new VBox(10);
+            layout.getChildren().addAll(label1, button1);
+            layout.setAlignment(Pos.CENTER);
+            Scene scene1= new Scene(layout, 300, 250);
+            popupwindow.setScene(scene1);
+            popupwindow.showAndWait();*//*
+        }*/
     }
 
     private int getX(int index) {
@@ -148,4 +188,7 @@ public class ChessBoard extends GridPane {
         return null;
     }
 
+    public Logger getLOG() {
+        return LOG;
+    }
 }
