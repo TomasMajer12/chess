@@ -9,8 +9,14 @@ import java.util.List;
  * Rook class extending Figure abstract class
  */
 public class Rook extends Figure{
+    private String tag = "R";
     public Rook(String color, String name, ChessField field) {
         super(color, name, field);
+    }
+
+    @Override
+    public String getTag() {
+        return tag;
     }
 
     @Override

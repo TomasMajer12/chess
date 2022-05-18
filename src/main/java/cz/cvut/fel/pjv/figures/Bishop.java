@@ -9,8 +9,14 @@ import java.util.List;
  * Bishop class extending Figure abstract class
  */
 public class Bishop extends Figure{
+    private String tag = "B";
     public Bishop(String color, String name, ChessField field) {
         super(color, name, field);
+    }
+
+    @Override
+    public String getTag() {
+        return tag;
     }
 
     @Override

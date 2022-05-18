@@ -10,8 +10,14 @@ import java.util.List;
  * King class extending Figure abstract class
  */
 public class Pawn extends Figure{
+    private String tag = "";
     public Pawn(String color, String name, ChessField field) {
         super(color, name, field);
+    }
+
+    @Override
+    public String getTag() {
+        return tag;
     }
 
     @Override

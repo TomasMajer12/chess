@@ -25,6 +25,7 @@ public class ChessBoard extends GridPane {
     private Set<ChessField> WhiteAttackedFields = new HashSet<>();
     private Set<ChessField> BlackAttackedFields = new HashSet<>();
     private Map<String, Set<ChessField>> attackedFields = new HashMap<>();
+    private List<String> PGNmoves;
     public int Turn_counter;
     private boolean AI;
     private SimpleAI ai_player;
@@ -35,6 +36,7 @@ public class ChessBoard extends GridPane {
      * @param cooperative
      */
     public ChessBoard(boolean cooperative) {
+        PGNmoves = new ArrayList<>();
         prepare_board(cooperative);
         Turn_counter = 0;
         AI = false;
@@ -46,6 +48,7 @@ public class ChessBoard extends GridPane {
      * @param AI
      */
     public ChessBoard(boolean cooperative, boolean AI) {
+        PGNmoves = new ArrayList<>();
         System.out.println("Starting AI game");
         prepare_board(cooperative);
         this.AI = AI;
@@ -267,7 +270,14 @@ public class ChessBoard extends GridPane {
         popupwindow.showAndWait();
     }
 
-    public Logger getLOG() {
-        return LOG;
+    /**
+     * add move to PGN
+     */
+    public void addToPGN(String move){
+        PGNmoves.add(move);
+    }
+
+    public List<String> getPGNmoves() {
+        return PGNmoves;
     }
 }

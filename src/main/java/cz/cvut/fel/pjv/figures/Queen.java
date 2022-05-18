@@ -9,10 +9,15 @@ import java.util.List;
  * Queen class extending Figure abstract class
  */
 public class Queen extends Figure{
+    private String tag = "Q";
     public Queen(String color, String name, ChessField field) {
         super(color, name, field);
     }
 
+    @Override
+    public String getTag() {
+        return tag;
+    }
 
     @Override
     public List<ChessField> AccessibleFields() {

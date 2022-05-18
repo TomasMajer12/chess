@@ -45,9 +45,33 @@ public abstract class Figure implements Serializable {
      */
     public abstract List<ChessField> AccessibleFields();
 
+    public abstract String getTag();
+
     /**
      * Main method for Figure movement
-     *
+     * Method has 2 types -> with castling bool and without
+     * @param move_field
+     */
+    public void move(ChessField move_field,Boolean isCastling) {
+        move_field.setFigure(this);
+        if (this.field != null) {
+            this.field.setFigure(null);
+        }
+        x =  move_field.getX();
+        y =  move_field.getY();
+        setField(move_field);
+        if(this instanceof King){ //castling
+            ((King) this).castling_rook_move();
+        }else if(this instanceof Pawn){ //special pawn movements
+            ((Pawn) this).enPassant_move();
+            ((Pawn) this).reach_end_of_board();
+        }
+        move_count++;
+        this.getField().getBoard().next_turn();//initiate next turn
+    }
+
+    /**
+     * Classic movement
      * @param move_field
      */
     public void move(ChessField move_field) {
@@ -60,10 +84,12 @@ public abstract class Figure implements Serializable {
         setField(move_field);
         if(this instanceof King){ //castling
             ((King) this).castling_rook_move();
-        }
-        if(this instanceof Pawn){ //special pawn movements
+        }else if(this instanceof Pawn){ //special pawn movements
             ((Pawn) this).enPassant_move();
             ((Pawn) this).reach_end_of_board();
+            this.getField().getBoard().addToPGN(getMove(getPos(),getTag(),field.getBoard().get_king(field.getBoard().getTurn()).isCheck()));//add to moves
+        }else{
+            this.getField().getBoard().addToPGN(getMove(getPos(),getTag(),field.getBoard().get_king(field.getBoard().getTurn()).isCheck()));//add to moves
         }
         move_count++;
         this.getField().getBoard().next_turn();//initiate next turn
@@ -131,6 +157,21 @@ public abstract class Figure implements Serializable {
             return "black";
         }
         return "white";
+    }
+
+    /**
+     * Position for PGN move saving
+     * @return
+     */
+    private String getPos() {
+        return ((char) (x + 97)) + "" + ((char) (7 - y + 49));
+    }
+
+    private String getMove(String pos,String figure,Boolean check){
+        if(check){
+            return String.join("",figure,pos,"+");
+        }
+        return String.join("",figure,pos);
     }
 
     //all getters and setters

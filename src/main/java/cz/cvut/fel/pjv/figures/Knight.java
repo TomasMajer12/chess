@@ -8,8 +8,14 @@ import java.util.List;
  * Knight class extending Figure abstract class
  */
 public class Knight extends Figure{
+    private String tag = "N";
     public Knight(String color, String name, ChessField field) {
         super(color, name, field);
+    }
+
+    @Override
+    public String getTag() {
+        return tag;
     }
 
     @Override

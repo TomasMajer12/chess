@@ -56,14 +56,6 @@ public class LoadBarMenu extends MenuButton {
                 ex.printStackTrace();
             }
         }));
-
-        getItems().add(new LoadBarMenu.item("Load pgn game 3", e-> {
-            try {
-                load_game_pgn("/pgn/pgn_save3.pgn");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }));
     }
 
     /**
@@ -83,6 +75,7 @@ public class LoadBarMenu extends MenuButton {
      */
     private void load_game_pgn(String filename){
         ChessXmlLoader LoadXml = new ChessXmlLoader(board);
+        board.clear_board();
         LoadXml.loadFromFile(board,"/saved_games/starter_board.xml");
         ChessPgnLoader pgnLoader = new ChessPgnLoader();
         pgnLoader.load_pgn_game(board,filename);

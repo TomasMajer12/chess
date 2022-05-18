@@ -11,9 +11,15 @@ import java.util.Set;
  */
 public class King extends Figure{
     public int check_count;
+    private String tag = "K";
     public King(String color, String name, ChessField field) {
         super(color, name, field);
         this.check_count = 0;
+    }
+
+    @Override
+    public String getTag() {
+        return tag;
     }
 
     @Override
@@ -76,10 +82,12 @@ public class King extends Figure{
     public void castling_rook_move(){
         if(check_count == 0 && getMove_count() == 0){
             if(x == 2){
-                field.getBoard().getField(0,y).getFigure().move(field.getBoard().getField(3,y));
+                field.getBoard().addToPGN("O-O-O");
+                field.getBoard().getField(0,y).getFigure().move(field.getBoard().getField(3,y),true);
                 field.getBoard().Turn_counter--;
             }else if(x == 6){
-                field.getBoard().getField(7,y).getFigure().move(field.getBoard().getField(5,y));
+                field.getBoard().addToPGN("O-O");
+                field.getBoard().getField(7,y).getFigure().move(field.getBoard().getField(5,y),true);
                 field.getBoard().Turn_counter--;
             }
 
