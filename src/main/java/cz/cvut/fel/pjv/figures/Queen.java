@@ -1,11 +1,13 @@
 package cz.cvut.fel.pjv.figures;
 
 import cz.cvut.fel.pjv.game.ChessField;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Queen class extending Figure abstract class
+ */
 public class Queen extends Figure{
     public Queen(String color, String name, ChessField field) {
         super(color, name, field);
@@ -17,7 +19,7 @@ public class Queen extends Figure{
         List<ChessField> fields = new ArrayList<>();
         //diagonals
         for (int i = 1; x + i < 8 && y + i < 8; i++){
-            if (addField(x + i, y + i, fields))break;
+            if (addField(x + i, y + i, fields))break; //break if we find figure
         }
         for (int i = 1; x + i < 8 && y - i >= 0; i++) {
             if (addField(x + i, y - i, fields))break;

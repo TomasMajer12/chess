@@ -1,17 +1,17 @@
 package cz.cvut.fel.pjv.gui;
 
 import cz.cvut.fel.pjv.figures.*;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * PopUpWindow for pawn when he reaches end of board
+ * Gives you 4 Figures that can be changed for pawn
+ */
 public class PawnPopUpStage extends Stage {
 
     public PawnPopUpStage(Figure figure) {
@@ -22,6 +22,7 @@ public class PawnPopUpStage extends Stage {
         Button bishop= figure_button("/images/figures/" + figure.getColor()+"_bishop.png");
         Button knight= figure_button("/images/figures/" + figure.getColor()+"_knight.png");
 
+        //create new figure on pawn field
         queen.setOnAction(e -> {
             figure.getField().setFigure(new Queen(figure.getColor(), "queen",figure.field));
             close();
@@ -54,9 +55,14 @@ public class PawnPopUpStage extends Stage {
         showAndWait();
     }
 
+    /**
+     * Method for graphic look of FigureButtons
+     * @param pathToImage
+     * @return
+     */
     private Button figure_button(String pathToImage){
         Button button = new Button();
-        button.getStyleClass().add("optionButton");
+        button.getStyleClass().add("optionButton"); //for hover mode
         button.setStyle("-fx-background-color: rgba(255,238,238,0)");
         button.setGraphic(new ImageView(Utils.loadImage(pathToImage,30,30)));
         button.setMinSize(50,50);

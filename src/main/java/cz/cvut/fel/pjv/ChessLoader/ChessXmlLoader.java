@@ -12,7 +12,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-
+/**
+ * Methods for xml Loading
+ */
 public class ChessXmlLoader {
     ChessBoard board;
 
@@ -20,8 +22,12 @@ public class ChessXmlLoader {
         this.board = board;
     }
 
+    /**
+     * This method loads xml file from resource folder and save it to board
+     * @param board
+     * @param Filename
+     */
     public void loadFromFile(ChessBoard board, String Filename) {
-
         try {
             File inputFile = new File(getClass().getResource(Filename).toURI());
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -30,13 +36,13 @@ public class ChessXmlLoader {
             doc.getDocumentElement().normalize();
 
             NodeList nList = doc.getElementsByTagName("Figure");
-            for (int temp = 0; temp < nList.getLength(); temp++) {
+            for (int temp = 0; temp < nList.getLength(); temp++) { //get all figures
                 Node nNode = nList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     Figure figure = createFigure(eElement.getAttribute("Color"),eElement.getAttribute("Type"),
                                     eElement.getAttribute("PosX"),eElement.getAttribute("PosY"));
-                    board.getField(figure.getX(),figure.getY()).setFigure(figure);
+                    board.getField(figure.getX(),figure.getY()).setFigure(figure); //save figure to board
                 }
             }
         } catch (Exception e) {
@@ -44,12 +50,20 @@ public class ChessXmlLoader {
         }
     }
 
-
+    /**
+     * This method creates instance of Figure class and its used for
+     * creating figure from xml
+     * @param color
+     * @param type
+     * @param PosX
+     * @param PosY
+     * @return
+     */
     private Figure createFigure(String color,String type, String PosX, String PosY){
         int x = Integer.parseInt(PosX);
         int y = Integer.parseInt(PosY);
 
-        if(color.contains("c")){
+        if(color.contains("c")){ //for some reason xml string "black" != normal black string
             color = "black";
         }else{
             color = "white";

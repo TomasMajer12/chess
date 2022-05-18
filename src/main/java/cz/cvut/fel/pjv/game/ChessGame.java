@@ -17,8 +17,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
+/**
+ * Class for managing GameScene, inGameMenu and timers
+ *
+ */
 public class ChessGame {
 
     public ChessBoard board;
@@ -34,15 +39,15 @@ public class ChessGame {
         this.AI_game = AI_game;
         this.maxTime = maxTime;
 
-        if(AI_game){
+        if(AI_game){//start AI game
             board = new ChessBoard(cooperative,AI_game);
-        }else{
+        }else{//other game modes
             board = new ChessBoard(cooperative);
         }
-
+        //set timer threads
         prepare_timers();
 
-        ChessXmlLoader LoadXml = new ChessXmlLoader(board);
+        ChessXmlLoader LoadXml = new ChessXmlLoader(board);//load save or starter board
         LoadXml.loadFromFile(board,game_board);
 
         board.updateAttackedFields();
@@ -55,14 +60,17 @@ public class ChessGame {
         stage.show();
     }
 
+    /**
+     * Method that prepares and start timers
+     */
     private void prepare_timers(){
-        WhiteTimer = new ChessTimer("white",board,125);
-        BlackTimer = new ChessTimer("black",board,125);
+        WhiteTimer = new ChessTimer("white",board,maxTime);
+        BlackTimer = new ChessTimer("black",board,maxTime);
 
-        WhiteTimerLabel = Timer_label();
+        WhiteTimerLabel = Timer_label(); //create labels for timers
         BlackTimerLabel = Timer_label();
 
-        Task White_timer_task = timer_task(WhiteTimer);
+        Task White_timer_task = timer_task(WhiteTimer); //create task for threads
         Task Black_timer_task = timer_task(BlackTimer);
 
         WhiteTimerLabel.textProperty().bind(White_timer_task.messageProperty());
@@ -77,15 +85,20 @@ public class ChessGame {
         thread2.start();
     }
 
+    /**
+     * Method for creating main BorderPane
+     * @return
+     */
     private BorderPane prepare_boarder_pane(){
         BorderPane pane = new BorderPane();
         pane.setMinSize(700,650);
 
         VBox TimerGrid = new VBox();
         TimerGrid.getChildren().add(WhiteTimerLabel);
-        TimerGrid.getChildren().add(BlackTimerLabel);
+        TimerGrid.getChildren().add(BlackTimerLabel); //add timers to borderpane
         TimerGrid.setAlignment(Pos.CENTER);
         TimerGrid.setPadding(new Insets(0,50,0,50));
+
         GridPane options = prepare_options_menu();
 
         pane.setTop(options);
@@ -97,6 +110,13 @@ public class ChessGame {
         return pane;
     }
 
+    /**
+     * Preparing InGameMenu
+     * Reset button -> new game
+     * Exit button -> back to main menu
+     * SaveBar and LoadBar menu for loading and saving games
+     * @return
+     */
     private GridPane prepare_options_menu(){
 
         GridPane options = new GridPane();
@@ -108,6 +128,7 @@ public class ChessGame {
         Button reset = ChessGameScene.optionButton("/images/icons/reset_icon.png");
         Button exit = ChessGameScene.optionButton("/images/icons/exit_icon.png");
 
+        //button actions
         reset.setOnAction((EventHandler) event -> new ChessGame(reset, "/saved_games/starter_board.xml",cooperative,AI_game,maxTime));
         exit.setOnAction((EventHandler) event -> {
             try {
@@ -116,6 +137,7 @@ public class ChessGame {
                 e.printStackTrace();
             }
         });
+        //add all to gridpane
         options.setPadding(new Insets(20,0,0,20));
         options.setHgap(20);
         options.setVgap(20);
@@ -126,6 +148,10 @@ public class ChessGame {
         return options;
     }
 
+    /**
+     * Graphic look for TimerLabel
+     * @return
+     */
     private Label Timer_label(){
         Label Tlabel = new Label();
         Tlabel.setStyle("-fx-background-color: #ffffff;-fx-border-style: solid;-fx-border-color:  #000000;-fx-border-width: 2");
@@ -134,18 +160,24 @@ public class ChessGame {
         return Tlabel;
     }
 
+    /**
+     * Method for creating Timer task
+     * Updates chesstimer every 10ms
+     * Task is useb by threads
+     * @param ChT
+     * @return
+     */
     private Task timer_task(ChessTimer ChT){
         Task task = new Task() {
             @Override
             public Void call() throws InterruptedException{
                 ChT.start();
                 while(true){
-                    updateMessage(ChT.get_formated_time());
+                    updateMessage(ChT.get_formated_time());//update
                     Thread.sleep(10);
                 }
             }
         };
         return task;
     }
-
 }

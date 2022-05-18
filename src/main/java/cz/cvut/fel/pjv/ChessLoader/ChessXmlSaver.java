@@ -11,10 +11,17 @@ import java.nio.file.Paths;
 import java.util.List;
 
 
-
+/**
+ * Methods for XML saving
+ */
 public class ChessXmlSaver {
 
-
+    /**
+     * this method takes board and writes it to Bytearray
+     *
+     * @param board
+     * @return
+     */
     public byte[] save(ChessBoard board) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
@@ -42,6 +49,11 @@ public class ChessXmlSaver {
         return baos.toByteArray();
     }
 
+    /**
+     * This method takes bytearray and save it to xml
+     * @param data
+     * @param file
+     */
     public void saveDataToFile(byte[] data, File file) {
         try{
             Files.write(Paths.get(file.toURI()), data);
@@ -50,15 +62,22 @@ public class ChessXmlSaver {
         }
     }
 
+
+    /**
+     * This method save all figures from board with given color to xml
+     * @param figures
+     * @param writer
+     * @throws XMLStreamException
+     */
     private void saveFigures(List<Figure> figures, XMLStreamWriter writer) throws XMLStreamException {
         for (Figure figure : figures) {
-            writer.writeCharacters("\t");
+            writer.writeCharacters("\t"); //nicer formating
             writer.writeEmptyElement("Figure");
             writer.writeAttribute("Type", figure.getName());
             writer.writeAttribute("Color",figure.getColor());
             writer.writeAttribute("PosX",Integer.toString(figure.getX()));
             writer.writeAttribute("PosY",Integer.toString(figure.getY()));
-            writer.writeCharacters("\n");
+            writer.writeCharacters("\n");//nicer formating
         }
     }
 

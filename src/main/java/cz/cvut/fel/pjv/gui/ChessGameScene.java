@@ -7,7 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-
+/**
+ * Class for board preparation
+ * creating board with labels
+ */
 public class ChessGameScene extends GridPane {
 
     public ChessGameScene(ChessBoard board) {
@@ -57,6 +60,11 @@ public class ChessGameScene extends GridPane {
         return l;
     }
 
+    /**
+     * Button used in option menu
+     * @param pathToImage
+     * @return
+     */
     public static Button optionButton(String pathToImage){
         Button button = new Button();
         button.getStyleClass().add("optionButton");

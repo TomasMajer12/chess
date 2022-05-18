@@ -14,7 +14,13 @@
     <center>
         <VBox alignment="CENTER"  BorderPane.alignment="CENTER" styleClass="buttonPanel" stylesheets="@../css/style.css">
             <children >
-                <Button mnemonicParsing="false" text="TIMER" BorderPane.alignment="CENTER"/>
+                <Label  text="TIMER"><font><Font size="50.0" /></font></Label>
+                <Button mnemonicParsing="false" text="+" BorderPane.alignment="CENTER" onAction="#add_to_timer"/>
+                <Label fx:id="TimerLabel" text="60">
+                    <font>
+                        <Font size="20.0" />
+                    </font></Label>
+                <Button  mnemonicParsing="false" text="-" BorderPane.alignment="CENTER" onAction="#remove_from_timer"/>
                 <Button fx:id="back" mnemonicParsing="false"  text="BACK" onAction="#change_to_main_menu" BorderPane.alignment="CENTER"/>
             </children>
         </VBox>

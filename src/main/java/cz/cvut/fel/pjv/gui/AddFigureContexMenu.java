@@ -7,8 +7,13 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 
+/**
+ * Simple ContexMenu for creative mode
+ * Used for adding and removing figures from the board
+ */
 public class AddFigureContexMenu extends ContextMenu {
     ChessField field;
+
     public AddFigureContexMenu(ChessField field){
         this.field = field;
         getItems().add(new item( "Add White Queen", e -> setFigure(new Queen("white", "queen",field))));
@@ -26,12 +31,19 @@ public class AddFigureContexMenu extends ContextMenu {
         getItems().add(new item("Remove Figure", e -> setFigure(null)));
     }
 
+    /**
+     * Set figure on field
+     * @param figure
+     */
     private void setFigure(Figure figure) {
         field.setFigure(figure);
         field.getBoard().updateAttackedFields();
         field.getBoard().state_test();
     }
 
+    /**
+     * private class for menuItems
+     */
     private class item extends MenuItem{
         public item(String text, EventHandler<ActionEvent> event){
             setText(text);

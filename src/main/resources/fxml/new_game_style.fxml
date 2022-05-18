@@ -27,6 +27,7 @@
                 <Button mnemonicParsing="false" fx:id="game" text="PLAY" onAction="#game_start" BorderPane.alignment="CENTER"/>
                 <Button mnemonicParsing="false"  fx:id="AIgame" onAction="#ai_game_start" text="VS COMPUTER" BorderPane.alignment="CENTER"/>
                 <Button mnemonicParsing="false"  fx:id="coop" text="COOPERATIVE" onAction="#load_coop_game" BorderPane.alignment="CENTER"/>
+                <Button mnemonicParsing="false"  fx:id="pgn_menu" text="GAME VIEWER" onAction="#pgn_menu" BorderPane.alignment="CENTER"/>
                 <Button  fx:id="back" mnemonicParsing="false" onAction="#change_to_main_menu" text="BACK" BorderPane.alignment="CENTER"/>
             </children>
         </VBox>

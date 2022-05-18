@@ -1,21 +1,33 @@
 package cz.cvut.fel.pjv.gui;
 
+import cz.cvut.fel.pjv.ChessLoader.PGNViewer;
 import cz.cvut.fel.pjv.game.ChessGame;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-
+/**
+ * This class holds main GUI controller
+ * ->creating mainstage
+ * ->easy changing between scenes
+ * ->main connector to fxml files
+ * ->it holds all fxml button id
+ *
+ */
 public class GuiController extends Application{
+
+    @FXML
+    private Label TimerLabel;
+
+    private int maxTime = 60;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -31,9 +43,7 @@ public class GuiController extends Application{
     }
 
     @FXML
-    private Button new_game,settings,back,load_game,game,save_1,save_2,save_3,coop,AIgame;
-
-    private int maxTime = 180;
+    private Button new_game,settings,back,load_game,game,save_1,save_2,save_3,coop,AIgame,pgn_menu,pgn_1,pgn_2,pgn_3;
 
     private Utils utils = new Utils();
 
@@ -90,5 +100,33 @@ public class GuiController extends Application{
     @FXML
     public void ai_game_start() {
         new ChessGame(AIgame, "/saved_games/starter_board.xml",false,true,maxTime);
+    }
+
+    @FXML
+    public void add_to_timer() {
+        maxTime++;
+        TimerLabel.setText(String.valueOf(maxTime));
+    }
+
+    @FXML
+    public void remove_from_timer() {
+        maxTime--;
+        TimerLabel.setText(String.valueOf(maxTime));
+    }
+    @FXML
+    public void pgn_menu() throws IOException {
+        utils.change_scene(pgn_menu,"/fxml/pgn_menu.fxml");
+    }
+    @FXML
+    public void load_pgn_1() {
+        new PGNViewer(pgn_1,"/pgn/pgn_save1.pgn");
+    }
+    @FXML
+    public void load_pgn_2() {
+        new PGNViewer(pgn_2,"/pgn/pgn_save2.pgn");
+    }
+    @FXML
+    public void load_pgn_3() {
+        new PGNViewer(pgn_3,"/pgn/pgn_save3.pgn");
     }
 }
