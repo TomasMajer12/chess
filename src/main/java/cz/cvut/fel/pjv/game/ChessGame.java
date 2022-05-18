@@ -1,7 +1,9 @@
 package cz.cvut.fel.pjv.game;
 
+import cz.cvut.fel.pjv.ChessLoader.ChessPgnLoader;
 import cz.cvut.fel.pjv.ChessLoader.ChessXmlLoader;
 
+import cz.cvut.fel.pjv.ChessLoader.PGNViewer;
 import cz.cvut.fel.pjv.gui.ChessGameScene;
 import cz.cvut.fel.pjv.gui.LoadBarMenu;
 import cz.cvut.fel.pjv.gui.SaveBarMenu;
@@ -46,9 +48,15 @@ public class ChessGame {
         }
         //set timer threads
         prepare_timers();
-
-        ChessXmlLoader LoadXml = new ChessXmlLoader(board);//load save or starter board
-        LoadXml.loadFromFile(board,game_board);
+        if(game_board.endsWith(".xml")){
+            ChessXmlLoader LoadXml = new ChessXmlLoader(board);//load save or starter board
+            LoadXml.loadFromFile(board,game_board);
+        }else if(game_board.endsWith(".pgn")){ //loading from pgn
+            ChessXmlLoader LoadXml = new ChessXmlLoader(board);
+            LoadXml.loadFromFile(board,"/saved_games/starter_board.xml");//prepare started board
+            ChessPgnLoader pgnLoader = new ChessPgnLoader();
+            pgnLoader.load_pgn_game(board,game_board); //make moves
+        }
 
         board.updateAttackedFields();
 

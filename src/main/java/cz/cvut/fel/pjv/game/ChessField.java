@@ -171,7 +171,7 @@ public class ChessField extends Label{
             if (source.can_move_to(source.getAccessibleFields(),this)) {
                 source.getAccessibleFields().forEach(ChessField::setDefaultColor);//reset colors
                 source.move(this);//move figure
-                getBoard().next_turn();//initite next turn
+                //getBoard().next_turn();//initite next turn
             }
         }
         setOnMouseExited(a -> onMouseExited()); // reset on mouse exit back to normal

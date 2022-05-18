@@ -103,7 +103,6 @@ public class ChessBoard extends GridPane {
         updateAttackedFields();
         state_test();
         Turn_counter++;
-        System.out.println(AI);
         if(AI){
             System.out.println("Ai makes move");
             ai_player.make_move();

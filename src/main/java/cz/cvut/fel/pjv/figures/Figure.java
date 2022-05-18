@@ -66,6 +66,7 @@ public abstract class Figure implements Serializable {
             ((Pawn) this).reach_end_of_board();
         }
         move_count++;
+        this.getField().getBoard().next_turn();//initiate next turn
     }
 
 

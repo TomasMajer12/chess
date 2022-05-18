@@ -77,8 +77,10 @@ public class King extends Figure{
         if(check_count == 0 && getMove_count() == 0){
             if(x == 2){
                 field.getBoard().getField(0,y).getFigure().move(field.getBoard().getField(3,y));
+                field.getBoard().Turn_counter--;
             }else if(x == 6){
                 field.getBoard().getField(7,y).getFigure().move(field.getBoard().getField(5,y));
+                field.getBoard().Turn_counter--;
             }
 
         }
