@@ -13,10 +13,14 @@ Functionalities:
 * Selection of pieces after reaching the end of the board by a pawn
 ![Snímek obrazovky (38)](https://user-images.githubusercontent.com/80472796/174432344-8731d572-b02c-498e-be4d-ed88e47273e0.png)
 
+* Loading and saving games to xml files
+![Snímek obrazovky (45)](https://user-images.githubusercontent.com/80472796/174432688-1a468107-f4c5-4aee-94b5-c9371f84b87d.png)
+
+* Loading, saving and viewing games in pgn format
+![Snímek obrazovky (44)](https://user-images.githubusercontent.com/80472796/174432682-c24359a2-bf70-47d1-89ff-e8745463fef2.png)
+
 * Game against computer
 * Chess timer 
-* Loading and saving games to xml files
-* Loading, saving and viewing games in pgn format
 
 Structure of program:
 * The project is structured into 5 main packages.
