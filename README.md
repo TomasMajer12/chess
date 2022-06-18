@@ -1,16 +1,22 @@
 Chess
-
+![Snímek obrazovky (40)](https://user-images.githubusercontent.com/80472796/174432466-83ba6fed-0e09-463c-969c-50f0c2f93d5d.png)
 Control:
 * Menu and whole game is controlled with the mouse
 
 Functionalities:
 * Checking and visibility of possible moves
+![Snímek obrazovky (32)](https://user-images.githubusercontent.com/80472796/174432298-f47a5ee2-bb96-4a8a-88c0-578209850110.png)
+
 * Manual placement of figures in cooperative mode
+![Snímek obrazovky (36)](https://user-images.githubusercontent.com/80472796/174432313-3dd8fd22-f180-48f8-98d4-34655ada3aa1.png)
+
+* Selection of pieces after reaching the end of the board by a pawn
+![Snímek obrazovky (38)](https://user-images.githubusercontent.com/80472796/174432344-8731d572-b02c-498e-be4d-ed88e47273e0.png)
+
 * Game against computer
 * Chess timer 
 * Loading and saving games to xml files
 * Loading, saving and viewing games in pgn format
-* Selection of pieces after reaching the end of the board by a pawn
 
 Structure of program:
 * The project is structured into 5 main packages.
